@@ -1,0 +1,7 @@
+.item_form {
+  margin-bottom: 30px;
+}
+.item_form span.error_champs {
+  color: red;
+  display: block;
+}

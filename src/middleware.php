@@ -15,7 +15,9 @@ $settings = array(
     'prefix' => ''
 );
 
+/*-------------------------------*/
 // Bootstrap Eloquent ORM
+/*-------------------------------*/
 $container = new Illuminate\Container\Container;
 $connFactory = new \Illuminate\Database\Connectors\ConnectionFactory($container);
 $conn = $connFactory->make($settings);
@@ -24,7 +26,9 @@ $resolver->addConnection('default', $conn);
 $resolver->setDefaultConnection('default');
 \Illuminate\Database\Eloquent\Model::setConnectionResolver($resolver);
 
+/*-------------------------------*/
 //on préenregistre quelque variable interresante...
+/*-------------------------------*/
 $app->add(function ($request, $response, $next) {
     //url utile
     $base_url = "http://".$_SERVER['HTTP_HOST'].$request->getUri()->getBasePath();
@@ -39,5 +43,6 @@ $app->add(function ($request, $response, $next) {
     //message flash
     $this->view->offsetSet('flashErreur', $this->flash->getMessage("error"));
     $this->view->offsetSet('flashSucces', $this->flash->getMessage("success"));
+
     return $next($request, $response);
 });

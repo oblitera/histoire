@@ -18,43 +18,43 @@ include("controllers/ControllerImage.php");
 //----------------------
 
 //view
-$app->get('/auteur/index', function ($request, $response, $args) {
+$app->get('/admin/auteur/index', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->index();   
-})->setName('auteur.index');
+})->setName('admin.auteur.index');
 
-$app->get('/auteur/show/{id:[0-9]+}', function ($request, $response, $args) {
+$app->get('/admin/auteur/show/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->show();
-})->setName('auteur.show');
+})->setName('admin.auteur.show');
 
 //add
-$app->get('/auteur/create', function ($request, $response, $args) {
+$app->get('/admin/auteur/create', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->create();
-})->setName('auteur.create');
+})->setName('admin.auteur.create');
 
-$app->post('/auteur/create', function ($request, $response, $args) {
+$app->post('/admin/auteur/create', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->store();
-})->setName('auteur.store');
+})->setName('admin.auteur.store');
 
 //edit
-$app->get('/auteur/edit/{id:[0-9]+}', function ($request, $response, $args) {
+$app->get('/admin/auteur/edit/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->edit();
-})->setName('auteur.edit');
+})->setName('admin.auteur.edit');
 
-$app->post('/auteur/edit/{id:[0-9]+}', function ($request, $response, $args) {
+$app->post('/admin/auteur/edit/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->update();
-})->setName('auteur.update');
+})->setName('admin.auteur.update');
 
 //destroy
-$app->get('/auteur/destroy/{id:[0-9]+}', function ($request, $response, $args) {
+$app->get('/admin/auteur/destroy/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->destroy();
-})->setName('auteur.destroy');
+})->setName('admin.auteur.destroy');
 
 
 

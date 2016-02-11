@@ -7,6 +7,11 @@ class ControllerAuteur extends Controller
 		return $this->app->view->render($this->response, 'auteur_index.html');
 	}
 
+	public function show()
+	{
+		return $this->app->view->render($this->response, 'auteur_show.html');
+	}
+
 	public function create()
 	{
 		//Controlle auteur
@@ -20,11 +25,15 @@ class ControllerAuteur extends Controller
 	}
 
 
-	/*
+	
 
 	public function store()
 	{
-		$validation = Auteur::validate($_POST);
+		$this->app->flash->addMessage('success', 'Auteur ajouter avec succés');
+		$route = $this->app->router->pathFor('admin.auteur.index',[]);
+    	return $this->response->withStatus(301)->withHeader('Location', $route);
+
+		/*$validation = Auteur::validate($_POST);
 
 	    if($validation === true)
 	    {
@@ -43,14 +52,14 @@ class ControllerAuteur extends Controller
 	    	}
 	    }
 
-	    return $this->app->view->render($this->response, 'auteur_add.html', $validation);
+	    return $this->app->view->render($this->response, 'auteur_add.html', $validation);*/
 	}
 
 
 	public function edit()
 	{
 		//initialisation
-		$cible = Auteur::find($this->args["id"]);
+		/*$cible = Auteur::find($this->args["id"]);
 		
 		if(empty($cible))
 		{
@@ -65,6 +74,14 @@ class ControllerAuteur extends Controller
 		
 		$data = array(
 			'values' => $cible->toArray()
+		);*/
+
+		$data = array(
+			"values" => array(
+				"pseudo" => "test",
+				"email" =>	"test@hotmail.fr",
+				"datenaissance" =>	"2015-01-02",
+			)
 		);
 		
 		return $this->app
@@ -75,7 +92,7 @@ class ControllerAuteur extends Controller
 	public function update()
 	{
 		//initialisation
-		$cible = Auteur::find($this->args["id"]);
+		/*$cible = Auteur::find($this->args["id"]);
 
 		if(empty($cible))
 		{
@@ -86,24 +103,26 @@ class ControllerAuteur extends Controller
 			return $this->response
 						->withStatus(301)
 						->withHeader('Location', $route);
-		}
+		}*/
 
 		//go validation !
-		$validation = Auteur::validate($_POST, false);
+		/*$validation = Auteur::validate($_POST, false);
 	    if($validation === true)
 	    {
 	    	if(Auteur::isValidUpdateEmail($cible->email, $_POST["email"]))
 	    	{
-	    		Auteur::edit($cible, $_POST);
+	    		Auteur::edit($cible, $_POST);*/
+
+	    		$this->app->flash->addMessage('success', 'Auteur éditer avec succés');
 
 	    		$route = $this->app
 	    					  ->router
-	    					  ->pathFor('auteur.index',[]);
+	    					  ->pathFor('admin.auteur.index',[]);
 
 	        	return $this->response
 	        				->withStatus(301)
 	        				->withHeader('Location', $route);		    		
-	    	}
+	    	/*}
 	    	else
 	    	{
 				$validation = array(
@@ -115,13 +134,13 @@ class ControllerAuteur extends Controller
 
 	    return $this->app
 	    			->view
-	    			->render($this->response, 'auteur_edit.html', $validation);
+	    			->render($this->response, 'auteur_edit.html', $validation);*/
 	}
 	
 	public function destroy()
 	{
 
-	}*/
+	}
 
 	static function session_auteur()
 	{

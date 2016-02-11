@@ -1,0 +1,19 @@
+{% extends "admin/starter.html" %}
+
+{% block starter_layout %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="box">
+      <div class="box-body">
+        {% block admin_form_menu %}
+        {% endblock %}        
+        {% block admin_form_formulaire %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+    {% block admin_form_after %}
+    {% endblock %}
+{% endblock %}
+

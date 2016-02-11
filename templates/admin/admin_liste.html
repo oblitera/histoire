@@ -1,0 +1,42 @@
+{% extends "admin/starter.html" %}
+
+{% block starter_header_css %}
+    <link rel="stylesheet" href="{{ themeAdmin }}/plugins/datatables/dataTables.bootstrap.css">
+{% endblock %}
+
+{% block starter_layout %}
+<div class="row">
+  <div class="col-sm-12">
+    <div class="box">
+      <div class="box-body">
+        {% block admin_liste_menu %}
+        {% endblock %}        
+        {% block admin_liste_table %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</div>
+    {% block admin_liste_after %}
+    {% endblock %}
+{% endblock %}
+
+{% block starter_footer_js %}
+    <script src="{{ themeAdmin }}/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ themeAdmin }}/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    {% block admin_liste_js %}
+      <script>
+        $(function () {
+          $('#table_d_1').DataTable({
+            "paging": false,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false
+          });
+        });
+      </script>
+    {% endblock %}
+{% endblock %}
+
