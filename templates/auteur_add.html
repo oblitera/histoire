@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block corpssite %}
+    <pre>
+{{ dump(themeAdmin) }}
+    {{ themeAdmin }}
+    </pre>
+    <form method="POST">
+        <div class="item_form">
+            <label>Pseudo</label>
+            <input type="text" name="pseudo" value="{{values['pseudo']}}">
+            <ul>
+                {% for erreur in errors['pseudo'] %}
+                    <li>{{ erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="item_form">
+            <label>Mdp</label>
+            <input type="text" name="mdp" value="{{values['mdp']}}">
+            <ul>
+                {% for erreur in errors['mdp'] %}
+                    <li>{{ erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="item_form">
+            <label>Email</label>
+            <input type="text" name="email" value="{{values['email']}}">
+            <ul>
+                {% for erreur in errors['email'] %}
+                    <li>{{ erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="item_form">
+            <label>Date de naissance</label>
+            <input type="text" name="datenaissance" value="{{values['datenaissance']}}">
+            <ul>
+                {% for erreur in errors['datenaissance'] %}
+                    <li>{{ erreur }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <input type="submit" value="S'inscrire">
+    </form>
+{% endblock %}
