@@ -25,7 +25,7 @@
                         </div>
                         <div class="item_form">
                             <label>Contenu</label>
-                            <textarea name="article_contenu"  class="form-control"></textarea>
+                            <textarea name="article_contenu"  class="form-control textarea">testlll</textarea>
                         </div>
                     </div>
                 </div>
@@ -139,6 +139,31 @@
         </div> 
         <input type="submit" value="Ajouter" class="btn bg-olive margin">              
     </form>
+{% endblock %}
+
+
+{% block starter_header_css %}
+    <link rel="stylesheet" href="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+{% endblock %}
+
+{% block starter_footer_js %}
+    <script src="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script>
+        $(function () {
+            $('.textarea').wysihtml5(
+                {
+                      toolbar: {
+                        "font-styles": false, // Font styling, e.g. h1, h2, etc.
+                        "emphasis": true, // Italics, bold, etc.
+                        "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                        "html": true, // Button which allows you to edit the generated HTML.
+                        "link": false, // Button to insert a link.
+                        "image": false, // Button to insert an image.
+                      }
+                }
+            );
+        });
+    </script>
 {% endblock %}
 
         
