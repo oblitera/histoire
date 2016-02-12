@@ -110,13 +110,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <li class="header">MENU</li>
                         <!-- Optionally, you can add icons to the links -->
                         <li class="active">
-                            <a href="{{ path_for('admin.auteur.index',{'id':1}) }}">
+                            <a href="{{ path_for('admin.auteur.index') }}">
                                 <i class="fa fa-user"></i>
                                 <span>Auteurs</span>
                             </a>
                         </li>                        
                         <li>
-                            <a href="#">
+                            <a href="{{ path_for('admin.article.index') }}">
                                 <i class="fa fa-newspaper-o"></i>
                                 <span>Articles</span>
                             </a>
@@ -144,10 +144,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             {% endblock %}
                         </small>
                     </h1>
-                    <ol class="breadcrumb">
-                        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-                        <li class="active">Here</li>
-                    </ol>
                 </section>
 
                 <!-- Main content -->

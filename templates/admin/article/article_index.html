@@ -1,0 +1,66 @@
+{% extends "admin/admin_liste.html" %}
+
+{% block starter_h1 %}
+	Articles
+{% endblock %}
+
+{% block starter_h1_complement %}
+	liste
+{% endblock %}
+
+{% block admin_liste_menu %}
+	<a type="button" class="btn bg-olive margin" href="{{ path_for('admin.article.create') }}">Ajouter un article</a>
+{% endblock %}
+
+{% block admin_liste_table %}
+	<table id="table_d_1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_d_1_info">
+		<thead>
+			<tr role="row">
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					ID
+				</th>
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Auteur
+				</th>
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Titre
+				</th>
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Date Création
+				</th>
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Date Edition
+				</th>
+				<th tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Action
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for i in 0..20 %}
+			<tr role="row" class="odd">
+				<td>{{ i }}</td>
+				<td>pseudo{{ i }}</td>
+				<td>Titre de l'article {{ i }}</td>
+				<td>2016-01-01</td>
+				<td>2016-01-02</td>
+				<td class="action_rows_table">
+					<a href="{{ path_for('admin.article.show',{'id':1}) }}">Voir</a> |
+					<a href="{{ path_for('admin.article.edit',{'id':1}) }}">Editer</a> |
+					<a href="{{ path_for('admin.article.destroy',{'id':1}) }}">Supprimer</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th rowspan="1" colspan="1">ID</th>
+				<th rowspan="1" colspan="1">Auteur</th>
+				<th rowspan="1" colspan="1">Iitre</th>
+				<th rowspan="1" colspan="1">Date Création</th>
+				<th rowspan="1" colspan="1">Date Edition</th>
+				<th rowspan="1" colspan="1">Action</th>
+			</tr>
+		</tfoot>
+	</table>
+{% endblock %}

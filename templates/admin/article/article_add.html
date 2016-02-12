@@ -1,0 +1,144 @@
+{% extends "admin/starter.html" %}
+
+{% block starter_h1 %}
+    Articles
+{% endblock %}
+
+{% block starter_h1_complement %}
+    Ajouter
+{% endblock %}
+
+{% block starter_layout %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="box">
+                    <div class="box-head">
+                        Informations Articles
+                    </div>
+                    <div class="box-body">
+                        <input type="hidden" name="article_coordonnee_long">
+                        <input type="hidden" name="article_coordonnee_lat">
+                        <div class="item_form">
+                            <label>Titre</label>
+                            <input type="text" name="article_titre"  class="form-control">
+                        </div>
+                        <div class="item_form">
+                            <label>Contenu</label>
+                            <textarea name="article_contenu"  class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="box-head">
+                        Télécharger une images
+                    </div>
+                    <div class="box-body">
+                        <div class="item_form">
+                            <label>Légende de l'image</label>
+                            <input type="text" name="image_titre_1"  class="form-control">
+                        </div>
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="image_file_1">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="box-head">
+                        Télécharger une images
+                    </div>
+                    <div class="box-body">
+                        <div class="item_form">
+                            <label>Légende de l'image</label>
+                            <input type="text" name="image_titre_2"  class="form-control">
+                        </div>
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="image_file_2">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="box-head">
+                        Télécharger une images
+                    </div>
+                    <div class="box-body">
+                        <div class="item_form">
+                            <label>Légende de l'image</label>
+                            <input type="text" name="image_titre_3"  class="form-control">
+                        </div>
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="image_file_3">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>  
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="box-head">
+                        Télécharger une images
+                    </div>
+                    <div class="box-body">
+                        <div class="item_form">
+                            <label>Légende de l'image</label>
+                            <input type="text" name="image_titre_4"  class="form-control">
+                        </div>
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="image_file_4">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="box-head">
+                        Télécharger une images
+                    </div>
+                    <div class="box-body">
+                        <div class="item_form">
+                            <label>Légende de l'image</label>
+                            <input type="text" name="image_titre_5"  class="form-control">
+                        </div>
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="image_file_5">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="col-lg-4">
+                <div class="box">
+                    <div class="box-head">
+                        Télécharger une images
+                    </div>
+                    <div class="box-body">
+                        <div class="item_form">
+                            <label>Légende de l'image</label>
+                            <input type="text" name="image_titre_6"  class="form-control">
+                        </div>
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="image_file_6">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div> 
+        <input type="submit" value="Ajouter" class="btn bg-olive margin">              
+    </form>
+{% endblock %}
+
+        

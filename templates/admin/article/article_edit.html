@@ -1,0 +1,55 @@
+{% extends "admin/admin_form.html" %}
+
+{% block starter_h1 %}
+    Articles
+{% endblock %}
+
+{% block starter_h1_complement %}
+    Editer
+{% endblock %}
+
+{% block admin_form_formulaire %}
+    <form method="post" enctype="multipart/form-data">
+        <input type="hidden" name="article_coordonnee_long">
+        <input type="hidden" name="article_coordonnee_lat">
+        <div class="item_form">
+            <label>Titre</label>
+            <input type="text" name="article_titre"  class="form-control">
+        </div>
+        <div class="item_form">
+            <label>Contenu</label>
+            <textarea name="article_contenu"  class="form-control"></textarea>
+        </div>
+        <div class="item_form">
+            <label>Légende de l'image</label>
+            <input type="text" name="image_titre_1">
+            <input type="file" name="image_file_1">
+        </div>
+        <div class="item_form">
+            <label>Légende de l'image</label>
+            <input type="text" name="image_titre_2">
+            <input type="file" name="image_file_2">
+        </div>
+        <div class="item_form">
+            <label>Légende de l'image</label>
+            <input type="text" name="image_titre_3">
+            <input type="file" name="image_file_3">
+        </div>
+        <div class="item_form">
+            <label>Légende de l'image</label>
+            <input type="text" name="image_titre_4">
+            <input type="file" name="image_file_4">
+        </div>
+        <div class="item_form">
+            <label>Légende de l'image</label>
+            <input type="text" name="image_titre_5">
+            <input type="file" name="image_file_5">
+        </div>
+        <div class="item_form">
+            <label>Légende de l'image</label>
+            <input type="text" name="image_titre_6">
+            <input type="file" name="image_file_6">
+        </div>
+        <input type="submit" value="Ajouter">
+    </form>
+{% endblock %}
