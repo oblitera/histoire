@@ -1,13 +1,19 @@
 <?php
 
-class ControllerAdminAuteur extends Controller 
+class ControllerAdminAuteur extends ControllerAdmin 
 {
+	static $MSG_SECTION				= "auteur";
 	static $MSG_UPDATE_VALIDE 		= "Auteur éditer avec succés";
 	static $MSG_UPDATE_MDP_VALIDE 	= "Le mot de passe de l'auteur a été édité avec succés";
 	static $MSG_CREATE_VALIDE 		= "Auteur ajouter avec succés";
 	static $MSG_DELETE_VALIDE 		= "Auteur supprimer avec succés";
 	static $ERROR_INCONNU 			= "Auteur inconnu, opération annulée";
 
+	public function init()
+	{
+		parent::init();
+		$this->setSection(ControllerAdminAuteur::$MSG_SECTION);
+	}
 
 	public function index()
 	{
@@ -36,7 +42,7 @@ class ControllerAdminAuteur extends Controller
 
 	public function store()
 	{
-		$this->app->flash->addMessage('success', ControllerAuteur::$MSG_CREATE_VALIDE);
+		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_CREATE_VALIDE);
 		$route = $this->app->router->pathFor('admin.auteur.index',[]);
     	return $this->response->withStatus(301)->withHeader('Location', $route);
 
@@ -120,7 +126,7 @@ class ControllerAdminAuteur extends Controller
 	    	{
 	    		Auteur::edit($cible, $_POST);*/
 
-	    		$this->app->flash->addMessage('success', ControllerAuteur::$MSG_UPDATE_VALIDE);
+	    		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_UPDATE_VALIDE);
 
 	    		$route = $this->app
 	    					  ->router
@@ -146,7 +152,7 @@ class ControllerAdminAuteur extends Controller
 	
 	public function destroy()
 	{
-		$this->app->flash->addMessage('success', ControllerAuteur::$MSG_DELETE_VALIDE);
+		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_DELETE_VALIDE);
 
 		$route = $this->app
 					  ->router
@@ -164,7 +170,7 @@ class ControllerAdminAuteur extends Controller
 	
 	public function updatemdp()
 	{
-		$this->app->flash->addMessage('success', ControllerAuteur::$MSG_UPDATE_MDP_VALIDE);
+		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_UPDATE_MDP_VALIDE);
 
 		$route = $this->app
 					  ->router

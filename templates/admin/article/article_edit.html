@@ -1,4 +1,4 @@
-{% extends "admin/admin_form.html" %}
+{% extends "admin/starter.html" %}
 
 {% block starter_h1 %}
     Articles
@@ -8,48 +8,149 @@
     Editer
 {% endblock %}
 
-{% block admin_form_formulaire %}
+{% block starter_layout %}
     <form method="post" enctype="multipart/form-data">
-        <input type="hidden" name="article_coordonnee_long">
-        <input type="hidden" name="article_coordonnee_lat">
-        <div class="item_form">
-            <label>Titre</label>
-            <input type="text" name="article_titre"  class="form-control">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Informations Articles</h3>
+                    </div>
+                    <div class="box-body">
+                        <input type="hidden" name="coordonnee_long">
+                        <input type="hidden" name="coordonnee_lat">
+                        <div class="item_form">
+                            <label>Auteur</label>
+                            <input type="text" name="auteur"  class="form-control">
+                            {% for erreur in errors['auteur'] %}
+                                <span class="error_champs">{{ erreur }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="item_form">
+                            <label>Titre</label>
+                            <input type="text" name="titre"  class="form-control">
+                            {% for erreur in errors['titre'] %}
+                                <span class="error_champs">{{ erreur }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="item_form">
+                            <label>Contenu</label>
+                            <textarea name="contenu"  class="form-control textarea">testlll</textarea>
+                            {% for erreur in errors['contenu'] %}
+                                <span class="error_champs">{{ erreur }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Télécharger des images</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <div class="item_form">
+                                    <img src="" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="item_form">
+                                    <label>Légende de l'image</label>
+                                    <input type="text" name="image_titre_1"  class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="item_form">
+                                    <label>Fichier image</label>
+                                    <input type="file" name="image_file_1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <div class="item_form">
+                                    <img src="" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="item_form">
+                                    <label>Légende de l'image</label>
+                                    <input type="text" name="image_titre_1"  class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="item_form">
+                                    <label>Fichier image</label>
+                                    <input type="file" name="image_file_2">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1">
+                                <div class="item_form">
+                                    <img src="" height="100%">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="item_form">
+                                    <label>Légende de l'image</label>
+                                    <input type="text" name="image_titre_1"  class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="item_form">
+                                    <label>Fichier image</label>
+                                    <input type="file" name="image_file_3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="box box-primary">
+                    <div class="box-header">
+                        <h3 class="box-title">Localisation de l'histoire</h3>
+                    </div>
+                    <div class="box-body">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d20221.462281323966!2d3.1842616999999995!3d50.6887129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1455295848307" width="100%" height="550" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        {% for erreur in errors['coordonnee_long'] %}
+                            <span class="error_champs">{{ erreur }}</span>
+                        {% endfor %}
+                        {% for erreur in errors['coordonnee_lat'] %}
+                            <span class="error_champs">{{ erreur }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="item_form">
-            <label>Contenu</label>
-            <textarea name="article_contenu"  class="form-control"></textarea>
-        </div>
-        <div class="item_form">
-            <label>Légende de l'image</label>
-            <input type="text" name="image_titre_1">
-            <input type="file" name="image_file_1">
-        </div>
-        <div class="item_form">
-            <label>Légende de l'image</label>
-            <input type="text" name="image_titre_2">
-            <input type="file" name="image_file_2">
-        </div>
-        <div class="item_form">
-            <label>Légende de l'image</label>
-            <input type="text" name="image_titre_3">
-            <input type="file" name="image_file_3">
-        </div>
-        <div class="item_form">
-            <label>Légende de l'image</label>
-            <input type="text" name="image_titre_4">
-            <input type="file" name="image_file_4">
-        </div>
-        <div class="item_form">
-            <label>Légende de l'image</label>
-            <input type="text" name="image_titre_5">
-            <input type="file" name="image_file_5">
-        </div>
-        <div class="item_form">
-            <label>Légende de l'image</label>
-            <input type="text" name="image_titre_6">
-            <input type="file" name="image_file_6">
-        </div>
-        <input type="submit" value="Ajouter">
+        <input type="submit" value="Modifier" class="btn bg-olive margin">              
     </form>
 {% endblock %}
+
+
+{% block starter_header_css %}
+    <link rel="stylesheet" href="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+{% endblock %}
+
+{% block starter_footer_js %}
+    <script src="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script>
+        $(function () {
+            $('.textarea').wysihtml5(
+                {
+                      toolbar: {
+                        "font-styles": false, // Font styling, e.g. h1, h2, etc.
+                        "emphasis": true, // Italics, bold, etc.
+                        "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                        "html": true, // Button which allows you to edit the generated HTML.
+                        "link": false, // Button to insert a link.
+                        "image": false, // Button to insert an image.
+                      }
+                }
+            );
+        });
+    </script>
+{% endblock %}
+
+        

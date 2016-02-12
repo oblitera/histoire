@@ -1,7 +1,7 @@
 {% extends "admin/admin_liste.html" %}
 
 {% block starter_h1 %}
-	Articles
+	Commentaires
 {% endblock %}
 
 {% block starter_h1_complement %}
@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block admin_liste_menu %}
-	<a type="button" class="btn bg-olive margin" href="{{ path_for('admin.article.create') }}">Ajouter un article</a>
+	<a type="button" class="btn bg-olive margin" href="{{ path_for('admin.commentaire.create') }}">Ajouter un commentaire</a>
 {% endblock %}
 
 {% block admin_liste_table %}
@@ -23,13 +23,13 @@
 					Auteur
 				</th>
 				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-					Titre
+					Article
+				</th>
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Contenu
 				</th>
 				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
 					Date Création
-				</th>
-				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-					Date Edition
 				</th>
 				<th tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
 					Action
@@ -45,13 +45,17 @@
 						pseudo{{ i }}
 					</a>
 				</td>
-				<td>Titre de l'article {{ i }}</td>
+				<td>
+					<a href="{{ path_for('admin.article.show',{'id':1}) }}">
+						Titre de l'article {{ i }}
+					</a>
+				</td>
+				<td>Commentaire {{ i }}</td>
 				<td>2016-01-01</td>
-				<td>2016-01-02</td>
 				<td class="action_rows_table">
-					<a href="{{ path_for('admin.article.show',{'id':1}) }}">Voir</a> |
-					<a href="{{ path_for('admin.article.edit',{'id':1}) }}">Editer</a> |
-					<a href="{{ path_for('admin.article.destroy',{'id':1}) }}">Supprimer</a>
+					<a href="{{ path_for('admin.commentaire.show',{'id':1}) }}">Voir</a> |
+					<a href="{{ path_for('admin.commentaire.edit',{'id':1}) }}">Editer</a> |
+					<a href="{{ path_for('admin.commentaire.destroy',{'id':1}) }}">Supprimer</a>
 				</td>
 			</tr>
 			{% endfor %}
@@ -60,9 +64,9 @@
 			<tr>
 				<th rowspan="1" colspan="1">ID</th>
 				<th rowspan="1" colspan="1">Auteur</th>
-				<th rowspan="1" colspan="1">Iitre</th>
+				<th rowspan="1" colspan="1">Article</th>
+				<th rowspan="1" colspan="1">Contenu</th>
 				<th rowspan="1" colspan="1">Date Création</th>
-				<th rowspan="1" colspan="1">Date Edition</th>
 				<th rowspan="1" colspan="1">Action</th>
 			</tr>
 		</tfoot>

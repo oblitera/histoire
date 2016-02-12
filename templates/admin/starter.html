@@ -7,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>AdminLTE 2 | Starter</title>
+        <title>{{ section }}</title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="{{ themeAdmin }}/bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -109,20 +109,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="sidebar-menu">
                         <li class="header">MENU</li>
                         <!-- Optionally, you can add icons to the links -->
-                        <li class="active">
+                        <li class="{% if section == 'auteur' %}active{% endif %}">
                             <a href="{{ path_for('admin.auteur.index') }}">
                                 <i class="fa fa-user"></i>
                                 <span>Auteurs</span>
                             </a>
                         </li>                        
-                        <li>
+                        <li class="{% if section == 'article' %}active{% endif %}">
                             <a href="{{ path_for('admin.article.index') }}">
                                 <i class="fa fa-newspaper-o"></i>
                                 <span>Articles</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+                        <li class="{% if section == 'commentaire' %}active{% endif %}">
+                            <a href="{{ path_for('admin.commentaire.index') }}">
                                 <i class="fa fa-commenting-o"></i>
                                 <span>Commentaires</span>
                             </a>

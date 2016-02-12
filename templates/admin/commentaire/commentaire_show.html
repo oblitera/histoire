@@ -1,0 +1,58 @@
+{% extends "admin/starter.html" %}
+
+{% block starter_h1 %}
+    Commentaire
+{% endblock %}
+
+{% block starter_h1_complement %}
+    voir
+{% endblock %}
+
+{% block starter_layout %}
+	<div class="row">
+		<div class="col-lg-8">
+			<div class="box box-primary">
+			<!-- Add the bg color to the header using any of the bg-* classes -->
+				<div class="box-body">
+					Ibi victu recreati et quiete, postquam abierat timor, vicos opulentos adorti equestrium adventu cohortium, quae casu propinquabant, nec resistere planitie porrecta conati digressi sunt retroque concedentes omne iuventutis robur relictum in sedibus acciverunt.
+					<br>
+					<br>
+					Illud tamen clausos vehementer angebat quod captis navigiis, quae frumenta vehebant per flumen, Isauri quidem alimentorum copiis adfluebant, ipsi vero solitarum rerum cibos iam consumendo inediae propinquantis aerumnas exitialis horrebant.
+					<br>
+					<br>
+					Etenim si attendere diligenter, existimare vere de omni hac causa volueritis, sic constituetis, iudices, nec descensurum quemquam ad hanc accusationem fuisse, cui, utrum vellet, liceret, nec, cum descendisset, quicquam habiturum spei fuisse, nisi alicuius intolerabili libidine et nimis acerbo odio niteretur. Sed ego Atratino, humanissimo atque optimo adulescenti meo necessario, ignosco, qui habet excusationem vel pietatis vel necessitatis vel aetatis. Si voluit accusare, pietati tribuo, si iussus est, necessitati, si speravit aliquid, pueritiae. Ceteris non modo nihil ignoscendum, sed etiam acriter est resistendum.
+					<br>
+					<br>
+					<a href="{{ path_for('admin.article.show',{'id':1}) }}" class="btn bg-gray margin">Voir l'article associé</a>
+					<a href="{{ path_for('admin.commentaire.edit',{'id':1}) }}" class="btn bg-gray margin">Editer</a>
+					<a href="{{ path_for('admin.commentaire.destroy',{'id':1}) }}" class="btn bg-red margin">Supprimer</a>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="box box-widget widget-user-2">
+			<!-- Add the bg color to the header using any of the bg-* classes -->
+				<div class="widget-user-header bg-blue">
+					<h3 class="widget-user-username">Quanta62</h3>
+				</div>
+				<div class="box-footer no-padding">
+					<ul class="nav nav-stacked">
+						<li>
+							<a href="#">Pseudo <span class="pull-right">Quanta62</span></a>
+						</li>
+						<li>
+							<a href="#">Email <span class="pull-right">quanta@hotmail.fr</span></a>
+						</li>
+						<li>
+							<a href="#">Date de naissance <span class="pull-right">2016-01-01</span></a>
+						</li>
+					</ul>
+					<center>
+						<a href="{{ path_for('admin.auteur.edit',{'id':1}) }}" class="btn bg-gray margin">Editer</a>
+						<a href="{{ path_for('admin.auteur.show',{'id':1}) }}" class="btn bg-gray margin">Voir</a>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

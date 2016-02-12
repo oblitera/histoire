@@ -1,0 +1,78 @@
+{% extends "admin/admin_form.html" %}
+
+{% block starter_h1 %}
+    Commentaire
+{% endblock %}
+
+{% block starter_h1_complement %}
+    Editer
+{% endblock %}
+
+{% block admin_form_formulaire %}
+    <form method="POST">
+        <div class="item_form">
+            <label>Article</label>
+            <select name="email" value="{{values['article']}}" class="form-control select2">
+                <option>Article 1 (auteur 1)</option>
+                <option>Article 2 (auteur 1)</option>
+                <option>Article 3 (auteur 2)</option>
+                <option>Article 4 (auteur 2)</option>
+                <option>Article 5 (auteur 3)</option>
+            </select>
+            {% for erreur in errors['article'] %}
+                <span class="error_champs">{{ erreur }}</span>
+            {% endfor %}
+        </div>
+        <div class="item_form">
+            <label>Auteur</label>
+            <select name="email" value="{{values['auteur']}}" class="form-control select2">
+                <option>Auteur 1</option>
+                <option>Auteur 2</option>
+                <option>Auteur 3</option>
+                <option>Auteur 4</option>
+                <option>Auteur 5</option>
+            </select>
+            {% for erreur in errors['article'] %}
+                <span class="error_champs">{{ auteur }}</span>
+            {% endfor %}
+        </div>
+        <div class="item_form">
+            <label>Contenu</label>
+            <textarea name="contenu"  class="form-control textarea">testlll</textarea>
+            {% for erreur in errors['contenu'] %}
+                <span class="error_champs">{{ erreur }}</span>
+            {% endfor %}
+        </div>
+        <input type="submit" value="Ajouter" class="btn btn-success">
+    </form>
+{% endblock %}
+
+{% block starter_header_css %}
+    <link rel="stylesheet" href="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <link rel="stylesheet" href="{{ themeAdmin }}/plugins/select2/select2.min.css">
+{% endblock %}
+
+{% block starter_footer_js %}
+    <script src="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="{{ themeAdmin }}/plugins/select2/select2.full.min.js"></script>
+    <script>
+        $(function () {
+            $('.textarea').wysihtml5(
+                {
+                      toolbar: {
+                        "font-styles": false, // Font styling, e.g. h1, h2, etc.
+                        "emphasis": true, // Italics, bold, etc.
+                        "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                        "html": true, // Button which allows you to edit the generated HTML.
+                        "link": false, // Button to insert a link.
+                        "image": false, // Button to insert an image.
+                      }
+                }
+            );
+        });
+
+        $(".select2").select2();
+    </script>
+{% endblock %}
+
+        

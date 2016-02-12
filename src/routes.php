@@ -7,6 +7,7 @@ include("models/Image.php");
 
 //Controlleurs
 include("controllers/Controller.php");
+include("controllers/ControllerAdmin.php");
 include("controllers/ControllerAdminArticle.php");
 include("controllers/ControllerAdminAuteur.php");
 include("controllers/ControllerAdminCommentaire.php");
@@ -76,7 +77,6 @@ $app->get('/admin/auteur/destroy/{id:[0-9]+}', function ($request, $response, $a
 
 
 
-
 //----------------------
 // Article
 //----------------------
@@ -119,3 +119,50 @@ $app->get('/admin/article/destroy/{id:[0-9]+}', function ($request, $response, $
     $c = new ControllerAdminAuteur($this, $request, $response, $args);
     return $c->destroy();
 })->setName('admin.article.destroy');
+
+
+
+
+
+//----------------------
+// Commentaire
+//----------------------
+
+//view
+$app->get('/admin/commentaire/index', function ($request, $response, $args) {
+    $c = new ControllerAdminCommentaire($this, $request, $response, $args);
+    return $c->index();   
+})->setName('admin.commentaire.index');
+
+$app->get('/admin/commentaire/show/{id:[0-9]+}', function ($request, $response, $args) {
+    $c = new ControllerAdminCommentaire($this, $request, $response, $args);
+    return $c->show();
+})->setName('admin.commentaire.show');
+
+//add
+$app->get('/admin/commentaire/create', function ($request, $response, $args) {
+    $c = new ControllerAdminCommentaire($this, $request, $response, $args);
+    return $c->create();
+})->setName('admin.commentaire.create');
+
+$app->post('/admin/commentaire/create', function ($request, $response, $args) {
+    $c = new ControllerAdminCommentaire($this, $request, $response, $args);
+    return $c->store();
+})->setName('admin.commentaire.store');
+
+//edit
+$app->get('/admin/commentaire/edit/{id:[0-9]+}', function ($request, $response, $args) {
+    $c = new ControllerAdminCommentaire($this, $request, $response, $args);
+    return $c->edit();
+})->setName('admin.commentaire.edit');
+
+$app->post('/admin/commentaire/edit/{id:[0-9]+}', function ($request, $response, $args) {
+    $c = new ControllerAdminCommentaire($this, $request, $response, $args);
+    return $c->update();
+})->setName('admin.commentaire.update');
+
+//destroy
+$app->get('/admin/commentaire/destroy/{id:[0-9]+}', function ($request, $response, $args) {
+    $c = new ControllerAdminCommentaire($this, $request, $response, $args);
+    return $c->destroy();
+})->setName('admin.commentaire.destroy');

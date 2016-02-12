@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block starter_h1_complement %}
-    Aenima59
+    Voir
 {% endblock %}
 
 {% block starter_layout %}
 	<div class="row">
 		<div class="col-lg-6">
-			<div class="box">
+			<div class="box box-primary">
 			<!-- Add the bg color to the header using any of the bg-* classes -->
 				<div class="box-header">
 					Article
@@ -25,11 +25,16 @@
 					<br>
 					<br>
 					Etenim si attendere diligenter, existimare vere de omni hac causa volueritis, sic constituetis, iudices, nec descensurum quemquam ad hanc accusationem fuisse, cui, utrum vellet, liceret, nec, cum descendisset, quicquam habiturum spei fuisse, nisi alicuius intolerabili libidine et nimis acerbo odio niteretur. Sed ego Atratino, humanissimo atque optimo adulescenti meo necessario, ignosco, qui habet excusationem vel pietatis vel necessitatis vel aetatis. Si voluit accusare, pietati tribuo, si iussus est, necessitati, si speravit aliquid, pueritiae. Ceteris non modo nihil ignoscendum, sed etiam acriter est resistendum.
+					<br>
+					<br>
+					<a href="{{ path_for('admin.auteur.edit',{'id':1}) }}" class="btn bg-gray margin">Voir l'auteur associé</a>
+					<a href="{{ path_for('admin.article.edit',{'id':1}) }}" class="btn bg-gray margin">Editer</a>
+					<a href="{{ path_for('admin.article.destroy',{'id':1}) }}" class="btn bg-red margin">Supprimer</a>
 				</div>
 			</div>
 		</div>
 		<div class="col-lg-6">
-			<div class="box">
+			<div class="box box-primary">
 			<!-- Add the bg color to the header using any of the bg-* classes -->
 				<div class="box-header">
 					Localisation
@@ -42,7 +47,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="box">
+			<div class="box box-primary">
 				<div class="box-header">
 					Images associées
 				</div>
@@ -71,7 +76,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
-			<div class="box">
+			<div class="box box-primary">
 				<div class="box-header">
 					Commentaires associées
 				</div>
@@ -106,9 +111,9 @@
 								</td>
 								<td>2016-01-01</td>
 								<td class="action_rows_table">
-									<a href="{{ path_for('admin.article.show',{'id':1}) }}">Voir</a> |
-									<a href="{{ path_for('admin.article.edit',{'id':1}) }}">Editer</a> |
-									<a href="{{ path_for('admin.article.destroy',{'id':1}) }}">Supprimer</a>
+									<a href="{{ path_for('admin.commentaire.show',{'id':1}) }}">Voir</a> |
+									<a href="{{ path_for('admin.commentaire.edit',{'id':1}) }}">Editer</a> |
+									<a href="{{ path_for('admin.commentaire.destroy',{'id':1}) }}">Supprimer</a>
 								</td>
 							</tr>
 							{% endfor %}

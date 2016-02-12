@@ -5,3 +5,7 @@
   color: red;
   display: block;
 }
+.item_form .select2-container .select2-selection--single {
+  height: 38px!important;
+  border-radius: 0px!important;
+}
