@@ -1,0 +1,22 @@
+{% extends "admin/admin_form.html" %}
+
+{% block starter_h1 %}
+    Auteurs
+{% endblock %}
+
+{% block starter_h1_complement %}
+    Modifier mot de passe
+{% endblock %}
+
+{% block admin_form_formulaire %}
+    <form method="POST">
+        <div class="item_form">
+            <label>Mdp</label>
+            <input type="password" name="mdp" value="{{values['mdp']}}" class="form-control">
+            {% for erreur in errors['mdp'] %}
+                <span class="error_champs">{{ erreur }}</span>
+            {% endfor %}
+        </div>
+        <input type="submit" value="Ajouter" class="btn btn-success">
+    </form>
+{% endblock %}
