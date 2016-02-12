@@ -4,12 +4,12 @@ class ControllerAuteur extends Controller
 {
 	public function index()
 	{
-		return $this->app->view->render($this->response, 'auteur_index.html');
+		return $this->app->view->render($this->response, 'admin/auteur/auteur_index.html');
 	}
 
 	public function show()
 	{
-		return $this->app->view->render($this->response, 'auteur_show.html');
+		return $this->app->view->render($this->response, 'admin/auteur/auteur_show.html');
 	}
 
 	public function create()
@@ -21,7 +21,7 @@ class ControllerAuteur extends Controller
 			return $this->redirect_unauthorized();
 		}*/
 
-		return $this->app->view->render($this->response, 'auteur_add.html');
+		return $this->app->view->render($this->response, 'admin/auteur/auteur_add.html');
 	}
 
 
@@ -86,7 +86,7 @@ class ControllerAuteur extends Controller
 		
 		return $this->app
 					->view
-					->render($this->response, 'auteur_edit.html', $data);		
+					->render($this->response, 'admin/auteur/auteur_edit.html', $data);		
 	}
 	
 	public function update()
@@ -139,7 +139,33 @@ class ControllerAuteur extends Controller
 	
 	public function destroy()
 	{
+		$this->app->flash->addMessage('success', 'Auteur supprimé avec succés');
 
+		$route = $this->app
+					  ->router
+					  ->pathFor('admin.auteur.index',[]);
+
+    	return $this->response
+    				->withStatus(301)
+    				->withHeader('Location', $route);	
+	}
+
+	public function editmdp()
+	{
+		return $this->app->view->render($this->response, 'admin/auteur/auteur_editmdp.html');
+	}
+	
+	public function updatemdp()
+	{
+		$this->app->flash->addMessage('success', 'Mot de passe modifier avec succés');
+
+		$route = $this->app
+					  ->router
+					  ->pathFor('admin.auteur.index',[]);
+
+    	return $this->response
+    				->withStatus(301)
+    				->withHeader('Location', $route);			
 	}
 
 	static function session_auteur()

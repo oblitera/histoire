@@ -50,11 +50,24 @@ $app->post('/admin/auteur/edit/{id:[0-9]+}', function ($request, $response, $arg
     return $c->update();
 })->setName('admin.auteur.update');
 
+//add
+$app->get('/admin/auteur/changemdp/{id:[0-9]+}', function ($request, $response, $args) {
+    $c = new ControllerAuteur($this, $request, $response, $args);
+    return $c->editmdp();
+})->setName('admin.auteur.editmdp');
+
+$app->post('/admin/auteur/changemdp/{id:[0-9]+}', function ($request, $response, $args) {
+    $c = new ControllerAuteur($this, $request, $response, $args);
+    return $c->updatemdp();
+})->setName('admin.auteur.updatemdp');
+
 //destroy
 $app->get('/admin/auteur/destroy/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAuteur($this, $request, $response, $args);
     return $c->destroy();
 })->setName('admin.auteur.destroy');
+
+
 
 
 
