@@ -1,0 +1,241 @@
+@couleur_1 : #fb9139;
+@couleur_2 : #ffc345;
+@couleur_3 : #7790d9;
+@couleur_4 : white;
+@couleur_5 : #66b34a;
+@gris : #f2efe9;
+
+@couleur_fond_body : @couleur_4;
+@couleur_lien : @couleur_3;
+
+@couleur_barre_fond : @couleur_1;
+@couleur_barre_font : @couleur_4;
+
+@couleur_bt_search_fond : @couleur_5;
+@couleur_bt_search_font : @couleur_4;
+@couleur_bt_search_hover_fond : @couleur_5;
+@couleur_bt_search_hover_font : @couleur_4;
+
+@couleur_paggination_fond : @couleur_1;
+@couleur_paggination_font : @couleur_4;
+@couleur_paggination_hover_border : black;
+@couleur_paggination_hover_font : @couleur_4;
+
+@couleur_itemrecherche_fond : @couleur_4;
+@couleur_itemrecherche_fond_hover : @gris;
+
+@couleur_itemrecherche_h2 : black;
+
+/*@couleur_1 : #fcfff5;
+@couleur_2 : #d1dbbd;
+@couleur_3 : #7caa34;
+@couleur_4 : #3e606f;
+@couleur_5 : #193441;
+
+@couleur_fond_body : @couleur_1;
+@couleur_lien : @couleur_5;
+
+@couleur_barre_fond : @couleur_4;
+@couleur_barre_font : @couleur_1;
+
+@couleur_bt_search_fond : @couleur_3;
+@couleur_bt_search_font : @couleur_1;
+@couleur_bt_search_hover_fond : @couleur_3;
+@couleur_bt_search_hover_font : @couleur_1;
+
+@couleur_paggination_fond : @couleur_4;
+@couleur_paggination_font : @couleur_1;
+@couleur_paggination_hover_fond : @couleur_4;
+@couleur_paggination_hover_font : @couleur_1;
+
+@couleur_itemrecherche_fond : @couleur_3;
+@couleur_itemrecherche_fond_hover : @couleur_2;
+
+@couleur_itemrecherche_h2 : @couleur_5;*/
+
+.button
+{
+	background: @couleur_bt_search_fond;
+	color: @couleur_bt_search_font;
+
+	&:hover
+	{
+		background: @couleur_bt_search_hover_fond;
+		color: @couleur_bt_search_hover_font;		
+	}
+}
+
+html
+{
+	margin:0px;
+	padding:0px;
+}
+
+body
+{
+	background-color: @couleur_fond_body;
+}
+
+#layout_front
+{
+
+	a
+	{
+		color:@couleur_lien;
+	}
+
+	header
+	{
+		nav
+		{
+			margin-bottom:0px;
+			background-color:@couleur_barre_fond;
+
+			a
+			{
+				color:@couleur_barre_font!important;
+			}			
+		}
+	}	
+
+	.layout_colonne_g
+	{
+		width:40%;		
+		min-height:100%;
+		padding:20px;
+
+		.formulaire_recherche
+		{
+			input[type="submit"]
+			{
+				width:100%;
+				.button;
+			}
+		}
+
+		.conteneur_item_recherche
+		{
+			margin-top:30px;
+
+			.item_recherche
+			{
+				padding-bottom:20px;
+				border-bottom:1px solid #d1d1d1;
+				padding-top:20px;
+
+				a
+				{
+					cursor:pointer;					
+				}
+
+				.item_recherche_preview
+				{
+					color:black;
+
+					&:hover
+					{
+						text-decoration:none;
+					}
+				}
+
+				&:hover
+				{
+					background-color:@couleur_itemrecherche_fond_hover;
+				}
+
+				.item_recherche_auteur, .item_recherche_viewcarte
+				{
+					/*font-weight: bold;*/
+				}
+
+				.item_recherche_img
+				{
+					/*border:1px solid @couleur_4;*/
+				}
+
+				h2
+				{
+					font-size: 20px;
+					margin-bottom: 10px;
+					margin-top:10px;
+					font-weight: bold;
+					color:@couleur_itemrecherche_h2;
+				}
+			}
+		}
+
+		.conteneur_item_pagination
+		{
+			margin-top:20px;
+
+			ul
+			{
+				padding-left:0px;
+
+				li
+				{
+					display: inline-block;
+					font-size: 15px;
+					width:35px;
+					height:35px;
+					background-color:@couleur_paggination_fond;
+					color:@couleur_paggination_font;
+					text-align:center;
+					padding-top:5px;
+					margin-right:6px;
+					margin-bottom:6px;
+					cursor:pointer;
+					border:2px solid @couleur_paggination_fond!important;
+
+					&:hover
+					{
+						border:2px solid @couleur_paggination_hover_border!important;						
+					}
+				}				
+			}
+		}
+
+		.conteneur_article
+		{
+			margin-top:30px;
+
+			.article_images
+			{
+				margin-top:20px!important;
+
+				img
+				{
+					border:1px solid #d1d1d1;
+				}
+			}
+
+			h1
+			{
+				font-size: 25px;
+				margin-bottom:0px;
+				font-weight: bold;
+			}
+		}
+	}
+
+	.layout_colonne_d
+	{
+		width:60%;
+		height:100%;
+		background-color:white;
+		position:fixed;
+		top:0px;
+		right:0px;
+	}
+
+	.vous_aimerez_aussi
+	{
+		margin-top:0px!important;
+	}
+
+	.vous_aimerez_aussi_img
+	{
+		margin-top:50px!important;
+	}
+	
+}

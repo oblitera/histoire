@@ -1,0 +1,150 @@
+/*@couleur_1 : #fcfff5;
+@couleur_2 : #d1dbbd;
+@couleur_3 : #7caa34;
+@couleur_4 : #3e606f;
+@couleur_5 : #193441;
+
+@couleur_fond_body : @couleur_1;
+@couleur_lien : @couleur_5;
+
+@couleur_barre_fond : @couleur_4;
+@couleur_barre_font : @couleur_1;
+
+@couleur_bt_search_fond : @couleur_3;
+@couleur_bt_search_font : @couleur_1;
+@couleur_bt_search_hover_fond : @couleur_3;
+@couleur_bt_search_hover_font : @couleur_1;
+
+@couleur_paggination_fond : @couleur_4;
+@couleur_paggination_font : @couleur_1;
+@couleur_paggination_hover_fond : @couleur_4;
+@couleur_paggination_hover_font : @couleur_1;
+
+@couleur_itemrecherche_fond : @couleur_3;
+@couleur_itemrecherche_fond_hover : @couleur_2;
+
+@couleur_itemrecherche_h2 : @couleur_5;*/
+.button {
+  background: #66b34a;
+  color: white;
+}
+.button:hover {
+  background: #66b34a;
+  color: white;
+}
+html {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: white;
+}
+#layout_front a {
+  color: #7790d9;
+}
+#layout_front header nav {
+  margin-bottom: 0px;
+  background-color: #fb9139;
+}
+#layout_front header nav a {
+  color: white !important;
+}
+#layout_front .layout_colonne_g {
+  width: 40%;
+  min-height: 100%;
+  padding: 20px;
+}
+#layout_front .layout_colonne_g .formulaire_recherche input[type="submit"] {
+  width: 100%;
+  background: #66b34a;
+  color: white;
+}
+#layout_front .layout_colonne_g .formulaire_recherche input[type="submit"]:hover {
+  background: #66b34a;
+  color: white;
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche {
+  margin-top: 30px;
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #d1d1d1;
+  padding-top: 20px;
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche a {
+  cursor: pointer;
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche .item_recherche_preview {
+  color: black;
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche .item_recherche_preview:hover {
+  text-decoration: none;
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche:hover {
+  background-color: #f2efe9;
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche .item_recherche_auteur,
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche .item_recherche_viewcarte {
+  /*font-weight: bold;*/
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche .item_recherche_img {
+  /*border:1px solid @couleur_4;*/
+}
+#layout_front .layout_colonne_g .conteneur_item_recherche .item_recherche h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  font-weight: bold;
+  color: black;
+}
+#layout_front .layout_colonne_g .conteneur_item_pagination {
+  margin-top: 20px;
+}
+#layout_front .layout_colonne_g .conteneur_item_pagination ul {
+  padding-left: 0px;
+}
+#layout_front .layout_colonne_g .conteneur_item_pagination ul li {
+  display: inline-block;
+  font-size: 15px;
+  width: 35px;
+  height: 35px;
+  background-color: #fb9139;
+  color: white;
+  text-align: center;
+  padding-top: 5px;
+  margin-right: 6px;
+  margin-bottom: 6px;
+  cursor: pointer;
+  border: 2px solid #fb9139 !important;
+}
+#layout_front .layout_colonne_g .conteneur_item_pagination ul li:hover {
+  border: 2px solid black !important;
+}
+#layout_front .layout_colonne_g .conteneur_article {
+  margin-top: 30px;
+}
+#layout_front .layout_colonne_g .conteneur_article .article_images {
+  margin-top: 20px!important;
+}
+#layout_front .layout_colonne_g .conteneur_article .article_images img {
+  border: 1px solid #d1d1d1;
+}
+#layout_front .layout_colonne_g .conteneur_article h1 {
+  font-size: 25px;
+  margin-bottom: 0px;
+  font-weight: bold;
+}
+#layout_front .layout_colonne_d {
+  width: 60%;
+  height: 100%;
+  background-color: white;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
+#layout_front .vous_aimerez_aussi {
+  margin-top: 0px!important;
+}
+#layout_front .vous_aimerez_aussi_img {
+  margin-top: 50px!important;
+}

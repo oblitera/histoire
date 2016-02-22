@@ -34,10 +34,12 @@ $app->add(function ($request, $response, $next) {
     $base_url = "http://".$_SERVER['HTTP_HOST'].$request->getUri()->getBasePath();
     $css_url = $base_url.'/css/';
     $js_url = $base_url.'/js/';
+    $img_url = $base_url.'/img/';
     $theme_admin = $base_url.'/themes/admin/';
     $this->view->offsetSet('baseUrl', $base_url); 
     $this->view->offsetSet('cssUrl', $css_url);
     $this->view->offsetSet('jsUrl', $js_url);
+    $this->view->offsetSet('imgUrl', $img_url); 
     $this->view->offsetSet('themeAdmin', $theme_admin);
 
     //message flash
