@@ -35,9 +35,6 @@ class Auteur extends Model {
 		$v->rule('lengthMin', 'email', 3)->label('L\'email');
 		$v->rule('email'	, 'email')->label('L\'email');
 
-		$v->rule('required'		, 'datenaissance')->label('La date de naissance');
-		$v->rule('dateFormat'	, 'datenaissance', 'Y-m-d')->label('La date de naissance');
-
 
 		if($v->validate() === true)
 		{
@@ -56,7 +53,6 @@ class Auteur extends Model {
 		$auteur->pseudo = $data["pseudo"];
 		$auteur->email = $data["email"];
 		$auteur->mdp = md5($data["mdp"]);
-		$auteur->datenaissance = $data["datenaissance"];
 		$auteur->save();
     }
 
@@ -64,13 +60,18 @@ class Auteur extends Model {
     {
 		$cible->pseudo = $data["pseudo"];
 		$cible->email = $data["email"];
-		$cible->datenaissance = $data["datenaissance"];
 		$cible->save();
     }
 
     static function isUniqueEmail($email)
     {
     	$recherche = self::where('email', '=', $email)->get()->toArray();
+    	return (empty($recherche)) ? true : false;
+    }
+
+    static function isUniquePseudo($pseudo)
+    {
+    	$recherche = self::where('pseudo', '=', $pseudo)->get()->toArray();
     	return (empty($recherche)) ? true : false;
     }
 
@@ -83,6 +84,18 @@ class Auteur extends Model {
     	else
     	{
     		return self::isUniqueEmail($newEmail);
+    	}
+    }
+
+    static function isValidUpdatePseudo($oldPseudo, $newPseudo)
+    {
+    	if($oldPseudo == $newPseudo)
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return self::isUniquePseudo($newPseudo);
     	}
     }
 }

@@ -175,14 +175,14 @@ $app->get('/admin/commentaire/destroy/{id:[0-9]+}', function ($request, $respons
 //view
 $app->get('/index', function ($request, $response, $args) {
     return $this->view->render($this->response, 'front/listerecherche.html');
-})->setName('admin.commentaire.index');
+})->setName('front.article.index');
 
 //view
 $app->get('/article/{id:[0-9]+}', function ($request, $response, $args) {
     return $this->view->render($this->response, 'front/article_view.html');
-})->setName('admin.commentaire.index');
+})->setName('front.article.show');
 
 //view
 $app->get('/', function ($request, $response, $args) {
     return $this->view->render($this->response, 'front/index.html');
-})->setName('admin.commentaire.index');
+})->setName('front.index');

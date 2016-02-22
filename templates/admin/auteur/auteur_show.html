@@ -16,24 +16,24 @@
 					<div class="box box-widget widget-user-2">
 					<!-- Add the bg color to the header using any of the bg-* classes -->
 						<div class="widget-user-header bg-blue">
-							<h3 class="widget-user-username">Quanta62</h3>
+							<h3 class="widget-user-username">{{ auteur["pseudo"] }}</h3>
 						</div>
 						<div class="box-footer no-padding">
 							<ul class="nav nav-stacked">
 								<li>
-									<a href="#">Pseudo <span class="pull-right">Quanta62</span></a>
+									<a href="#">Email <span class="pull-right">{{ auteur["email"] }}</span></a>
 								</li>
 								<li>
-									<a href="#">Email <span class="pull-right">quanta@hotmail.fr</span></a>
+									<a href="#">Crée le<span class="pull-right">{{ auteur["created_at"] }}</span></a>
 								</li>
 								<li>
-									<a href="#">Date de naissance <span class="pull-right">2016-01-01</span></a>
+									<a href="#">Modifié le<span class="pull-right">{{ auteur["updated_at"] }}</span></a>
 								</li>
 							</ul>
 							<center>
-								<a href="{{ path_for('admin.auteur.edit',{'id':1}) }}" class="btn bg-gray margin">Editer</a>
-								<a href="{{ path_for('admin.auteur.editmdp',{'id':1}) }}" class="btn bg-gray margin">Modifier le MDP</a>
-								<a href="{{ path_for('admin.auteur.destroy',{'id':1}) }}" class="btn bg-red margin">Supprimer</a>
+								<a href="{{ path_for('admin.auteur.edit',{'id':auteur["id"]}) }}" class="btn bg-gray margin">Editer</a>
+								<a href="{{ path_for('admin.auteur.editmdp',{'id':auteur["id"]}) }}" class="btn bg-gray margin">Modifier le MDP</a>
+								<a href="{{ path_for('admin.auteur.destroy',{'id':auteur["id"]}) }}" class="btn bg-red margin">Supprimer</a>
 							</center>
 						</div>
 					</div>
