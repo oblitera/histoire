@@ -186,6 +186,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- AdminLTE App -->
         <script src="{{ themeAdmin }}/dist/js/app.min.js"></script>
 
+        <script>
+            $(function(){
+                $(".alert_link").click(function(event){
+                    event.preventDefault();
+                    if (confirm ("Voulez-vous vraiment supprimer l'objet ?"))
+                    {
+                        window.location = $(this).attr("href");
+                    }
+                        
+                });
+            });
+        </script>
+
         {% block starter_footer_js %}
         {% endblock %}
     </body>

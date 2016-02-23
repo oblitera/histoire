@@ -20,6 +20,9 @@
 					ID
 				</th>
 				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Actif
+				</th>
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
 					Pseudo
 				</th>
 				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
@@ -40,6 +43,13 @@
 			{% for auteur in auteurs %}
 			<tr role="row" class="odd">
 				<td>{{ auteur["id"] }}</td>
+				<td>
+					{% if auteur["actif"] == "1" %}
+						<span style="color:green;">Oui</span>
+					{% else %}
+						<span style="color:red;">Non</span>
+					{% endif %}
+				</td>
 				<td>{{ auteur["pseudo"] }}</td>
 				<td>{{ auteur["email"] }}</td>
 				<td>{{ auteur["created_at"] }}</td>
@@ -47,7 +57,7 @@
 				<td class="action_rows_table">
 					<a href="{{ path_for('admin.auteur.show',{'id':auteur["id"]}) }}">Voir</a> |
 					<a href="{{ path_for('admin.auteur.edit',{'id':auteur["id"]}) }}">Editer</a> |
-					<a href="{{ path_for('admin.auteur.destroy',{'id':auteur["id"]}) }}">Supprimer</a> |
+					<a href="{{ path_for('admin.auteur.destroy',{'id':auteur["id"]}) }}" class="alert_link">Supprimer</a> |
 					<a href="{{ path_for('admin.auteur.editmdp',{'id':auteur["id"]}) }}">Modifier mot de passe</a>
 				</td>
 			</tr>
@@ -56,6 +66,7 @@
 		<tfoot>
 			<tr>
 				<th rowspan="1" colspan="1">ID</th>
+				<th rowspan="1" colspan="1">Actif</th>
 				<th rowspan="1" colspan="1">Pseudo</th>
 				<th rowspan="1" colspan="1">Email</th>
 				<th rowspan="1" colspan="1">Date Création</th>

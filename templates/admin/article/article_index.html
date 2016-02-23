@@ -37,21 +37,21 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for i in 0..20 %}
+			{% for article in articles %}
 			<tr role="row" class="odd">
-				<td>{{ i }}</td>
+				<td>{{ article["id"] }}</td>
 				<td>
-					<a href="{{ path_for('admin.auteur.show',{'id':1}) }}">
-						pseudo{{ i }}
+					<a href="{{ path_for('admin.auteur.show',{'id':article["id"]}) }}">
+						{{ article["auteur_id"] }}
 					</a>
 				</td>
-				<td>Titre de l'article {{ i }}</td>
-				<td>2016-01-01</td>
-				<td>2016-01-02</td>
+				<td>{{ article["titre"] }}</td>
+				<td>{{ article["created_at"] }}</td>
+				<td>{{ article["updated_at"] }}</td>
 				<td class="action_rows_table">
-					<a href="{{ path_for('admin.article.show',{'id':1}) }}">Voir</a> |
-					<a href="{{ path_for('admin.article.edit',{'id':1}) }}">Editer</a> |
-					<a href="{{ path_for('admin.article.destroy',{'id':1}) }}">Supprimer</a>
+					<a href="{{ path_for('admin.article.show',{'id':article["id"]}) }}">Voir</a> |
+					<a href="{{ path_for('admin.article.edit',{'id':article["id"]}) }}">Editer</a> |
+					<a href="{{ path_for('admin.article.destroy',{'id':article["id"]}) }}">Supprimer</a>
 				</td>
 			</tr>
 			{% endfor %}

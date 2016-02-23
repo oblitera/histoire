@@ -17,6 +17,13 @@ class ControllerAdminAuteur extends ControllerAdmin
 		$this->setSection(ControllerAdminAuteur::$MSG_SECTION);
 	}
 
+
+	/*------------------
+	 *  Affichage
+	 *------------------
+	 */
+
+
 	public function index()
 	{
 		$data = array(
@@ -41,6 +48,13 @@ class ControllerAdminAuteur extends ControllerAdmin
 
 		return $this->app->view->render($this->response, 'admin/auteur/auteur_show.html', $data);
 	}
+
+
+	/*------------------
+	 *  Creation
+	 *------------------
+	 */
+
 
 	public function create()
 	{
@@ -97,6 +111,11 @@ class ControllerAdminAuteur extends ControllerAdmin
 	    return $this->app->view->render($this->response, 'admin/auteur/auteur_add.html', $validation);
 	}
 
+
+	/*------------------
+	 *  Edition
+	 *------------------
+	 */
 
 	public function edit()
 	{
@@ -181,6 +200,54 @@ class ControllerAdminAuteur extends ControllerAdmin
 	    			->render($this->response, 'admin/auteur/auteur_edit.html', $validation);
 	}
 	
+
+	/*------------------
+	 *  Changer mot de passe
+	 *------------------
+	 */
+
+	public function editmdp()
+	{
+		return $this->app->view->render($this->response, 'admin/auteur/auteur_editmdp.html');
+	}
+	
+	public function updatemdp()
+	{
+		//initialisation
+		$cible = Auteur::find($this->args["id"]);
+		if(empty($cible))
+		{
+			return $this->redirect_article_iconnu();
+		}
+
+		$validation = Auteur::isValidePass($_POST);
+		if($validation === true)
+		{
+			$cible->mdp = md5($data["mdp"]);
+			$cible->save();
+
+			$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_UPDATE_MDP_VALIDE);
+
+			$route = $this->app
+						  ->router
+						  ->pathFor('admin.auteur.index',[]);
+
+	    	return $this->response
+	    				->withStatus(301)
+	    				->withHeader('Location', $route);	
+		}
+
+	    return $this->app
+	    			->view
+	    			->render($this->response, 'admin/auteur/auteur_editmdp.html', $validation);		
+	}
+	
+
+	/*------------------
+	 *  Suppresion
+	 *------------------
+	 */
+
 	public function destroy()
 	{
 		//initialisation
@@ -189,6 +256,8 @@ class ControllerAdminAuteur extends ControllerAdmin
 		{
 			return $this->redirect_article_iconnu();
 		}
+
+		$cible->delete();
 
 		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_DELETE_VALIDE);
 
@@ -199,24 +268,6 @@ class ControllerAdminAuteur extends ControllerAdmin
     	return $this->response
     				->withStatus(301)
     				->withHeader('Location', $route);	
-	}
-
-	public function editmdp()
-	{
-		return $this->app->view->render($this->response, 'admin/auteur/auteur_editmdp.html');
-	}
-	
-	public function updatemdp()
-	{
-		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_UPDATE_MDP_VALIDE);
-
-		$route = $this->app
-					  ->router
-					  ->pathFor('admin.auteur.index',[]);
-
-    	return $this->response
-    				->withStatus(301)
-    				->withHeader('Location', $route);			
 	}
 
 

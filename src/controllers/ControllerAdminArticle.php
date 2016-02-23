@@ -16,7 +16,11 @@ class ControllerAdminArticle extends ControllerAdmin
 
 	public function index()
 	{
-		return $this->app->view->render($this->response, 'admin/article/article_index.html');
+		$data = array(
+			"articles" => Article::all()->toArray()
+		);
+
+		return $this->app->view->render($this->response, 'admin/article/article_index.html', $data);
 	}
 
 	public function show()
@@ -26,14 +30,30 @@ class ControllerAdminArticle extends ControllerAdmin
 
 	public function create()
 	{
-		return $this->app->view->render($this->response, 'admin/article/article_add.html');
+		$data = array(
+			"auteurs" => Auteur::all()->toArray()
+		);
+
+		return $this->app->view->render($this->response, 'admin/article/article_add.html', $data);
 	}
 
 	public function store()
 	{
-		$this->app->flash->addMessage('success', ControllerAdminArticle::$MSG_CREATE_VALIDE);
-		$route = $this->app->router->pathFor('admin.article.index',[]);
-    	return $this->response->withStatus(301)->withHeader('Location', $route);
+		$data = array(
+			"auteurs" => Auteur::all()->toArray()
+		);
+
+		$validation = Article::validate($_POST);
+		if($validation === true)
+		{
+			Article::add($_POST);
+			$this->app->flash->addMessage('success', ControllerAdminArticle::$MSG_CREATE_VALIDE);
+			$route = $this->app->router->pathFor('admin.article.index',[]);
+	    	return $this->response->withStatus(301)->withHeader('Location', $route);			
+		}
+
+		$data = array_merge($data, $validation);
+		return $this->app->view->render($this->response, 'admin/article/article_add.html', $data);
 	}
 
 	public function update()
