@@ -39,7 +39,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 		$cible = Auteur::find($this->args["id"]);
 		if(empty($cible))
 		{
-			return $this->redirect_article_iconnu();
+			return $this->redirect_inconnu();
 		}
 
 		$data = array(
@@ -123,7 +123,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 		$cible = Auteur::find($this->args["id"]);
 		if(empty($cible))
 		{
-			return $this->redirect_article_iconnu();
+			return $this->redirect_inconnu();
 		}
 		
 		$data = array(
@@ -141,7 +141,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 		$cible = Auteur::find($this->args["id"]);
 		if(empty($cible))
 		{
-			return $this->redirect_article_iconnu();
+			return $this->redirect_inconnu();
 		}
 
 		//go validation !
@@ -217,7 +217,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 		$cible = Auteur::find($this->args["id"]);
 		if(empty($cible))
 		{
-			return $this->redirect_article_iconnu();
+			return $this->redirect_inconnu();
 		}
 
 		$validation = Auteur::isValidePass($_POST);
@@ -254,7 +254,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 		$cible = Auteur::find($this->args["id"]);
 		if(empty($cible))
 		{
-			return $this->redirect_article_iconnu();
+			return $this->redirect_inconnu();
 		}
 
 		$cible->delete();
@@ -271,7 +271,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 	}
 
 
-	protected function redirect_article_iconnu()
+	protected function redirect_inconnu()
 	{
 		$route = $this->app
 					  ->router

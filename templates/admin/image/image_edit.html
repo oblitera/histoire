@@ -1,0 +1,76 @@
+{% extends "admin/starter.html" %}
+
+{% block starter_h1 %}
+    Image
+{% endblock %}
+
+{% block starter_h1_complement %}
+    Editer
+{% endblock %}
+
+{% block starter_layout %}
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <input type="hidden" name="coordonnee_long" value="50.7{{ random() }}">
+                        <input type="hidden" name="coordonnee_lat" value="2.87{{ random() }}">
+                        <div class="item_form">
+                            <label>Légende</label>
+                            <input type="text" name="legende"  class="form-control" value="{{values['legende']}}">
+                            {% for erreur in errors['legende'] %}
+                                <span class="error_champs">{{ erreur }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="image_file_2">
+                            {% for erreur in errors['contenu'] %}
+                                <span class="error_champs">{{ erreur }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="item_form">
+                            <label>Actif</label>
+                            <select name="actif" class="form-control select2">
+                                <option {% if values['actif'] == "0" %} selected {% endif %}>Non</option>
+                                <option {% if values['actif'] == "1" %} selected {% endif %}>Oui</option>                
+                            </select>
+                            {% for erreur in errors['actif'] %}
+                                <span class="error_champs">{{ erreur }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Modifier" class="btn bg-olive margin">              
+    </form>
+{% endblock %}
+
+
+{% block starter_header_css %}
+    <link rel="stylesheet" href="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+{% endblock %}
+
+{% block starter_footer_js %}
+    <script src="{{ themeAdmin }}/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script>
+        $(function () {
+            $('.textarea').wysihtml5(
+                {
+                      toolbar: {
+                        "font-styles": false, // Font styling, e.g. h1, h2, etc.
+                        "emphasis": true, // Italics, bold, etc.
+                        "lists": true, // (Un)ordered lists, e.g. Bullets, Numbers.
+                        "html": true, // Button which allows you to edit the generated HTML.
+                        "link": false, // Button to insert a link.
+                        "image": false, // Button to insert an image.
+                      }
+                }
+            );
+        });
+    </script>
+{% endblock %}
+
+        

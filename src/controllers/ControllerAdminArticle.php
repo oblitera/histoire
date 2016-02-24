@@ -56,19 +56,61 @@ class ControllerAdminArticle extends ControllerAdmin
 		return $this->app->view->render($this->response, 'admin/article/article_add.html', $data);
 	}
 
+	public function edit()
+	{
+		//initialisation
+		$cible = Article::find($this->args["id"]);
+		if(empty($cible))
+		{
+			return $this->redirect_inconnu();
+		}
+
+		$data = array(
+			'values' => $cible->toArray(),
+			'auteurs' => Auteur::all()->toArray()
+		);
+
+		return $this->app->view->render($this->response, 'admin/article/article_edit.html', $data);
+	}
+
 	public function update()
 	{
-		$this->app->flash->addMessage('success', ControllerAdminArticle::$MSG_UPDATE_VALIDE);
+		//initialisation
+		$cible = Article::find($this->args["id"]);
+		if(empty($cible))
+		{
+			return $this->redirect_inconnu();
+		}
 
-		$route = $this->app
-					  ->router
-					  ->pathFor('admin.article.index',[]);
+		$validation = Article::validate($_POST);
+		if($validation === true)
+		{
+			$cible::edit($cible, $_POST);
 
-    	return $this->response
-    				->withStatus(301)
-    				->withHeader('Location', $route);	
+			$images = $this->getPostImg();
+			if($images)
+			{
 
-		return $this->app->view->render($this->response, 'admin/article/article_show.html');
+			}
+
+			$this->app->flash->addMessage('success', ControllerAdminArticle::$MSG_UPDATE_VALIDE);
+
+			$route = $this->app
+						  ->router
+						  ->pathFor('admin.article.index',[]);
+
+	    	return $this->response
+	    				->withStatus(301)
+	    				->withHeader('Location', $route);			
+		}		
+
+		$data = array(
+			'values' => $cible->toArray(),
+			'auteurs' => Auteur::all()->toArray()
+		);
+		$data = array_merge($data, $validation);
+
+		return $this->app->view->render($this->response, 'admin/article/article_edit.html', $data);
 	}
 
 	public function destroy()
@@ -84,4 +126,18 @@ class ControllerAdminArticle extends ControllerAdmin
     				->withHeader('Location', $route);	
 	}
 
+	protected function redirect_inconnu()
+	{
+		$route = $this->app
+					  ->router
+					  ->pathFor('admin.article.index',[]);
+
+		$this->app
+			 ->flash
+			 ->addMessage('error', self::$ERROR_INCONNU);
+
+		return $this->response
+					->withStatus(301)
+					->withHeader('Location', $route);
+	}
 }

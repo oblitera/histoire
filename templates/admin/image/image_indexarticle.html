@@ -1,7 +1,7 @@
 {% extends "admin/admin_liste.html" %}
 
 {% block starter_h1 %}
-    Articles
+    Images de l'Article "ffffff"
 {% endblock %}
 
 {% block starter_h1_complement %}
@@ -9,10 +9,10 @@
 {% endblock %}
 
 {% block admin_liste_menu %}
-    <a type="button" class="btn bg-olive margin" href="{{ path_for('admin.article.create') }}">Ajouter un article</a>
 {% endblock %}
 
 {% block admin_liste_table %}
+    <a type="button" class="btn bg-gray margin" href="{{ path_for('admin.article.show',{'id':1}) }}">Revenir à l'article</a>
     <table id="table_d_1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_d_1_info">
         <thead>
             <tr role="row">
@@ -20,16 +20,16 @@
                     ID
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-                    Auteur
+                    Article
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-                    Titre
+                    Image
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-                    Date Création
+                    Légende
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-                    Date Edition
+                    Status
                 </th>
                 <th tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Action
@@ -37,22 +37,16 @@
             </tr>
         </thead>
         <tbody>
-            {% for article in articles %}
+            {% for i in 0..5 %}
             <tr role="row" class="odd">
-                <td>{{ article["id"] }}</td>
-                <td>
-                    <a href="{{ path_for('admin.auteur.show',{'id':article["id"]}) }}">
-                        {{ article["auteur_id"] }}
-                    </a>
-                </td>
-                <td>{{ article["titre"] }}</td>
-                <td>{{ article["created_at"] }}</td>
-                <td>{{ article["updated_at"] }}</td>
+                <td>{{ i }}</td>
+                <td>article {{ i }}</td>
+                <td>{{ i }}</td>                
+                <td>legende {{ i }}</td>
+                <td>ok</td>
                 <td class="action_rows_table">
-                    <a href="{{ path_for('admin.article.show',{'id':article["id"]}) }}">Voir</a> |
-                    <a href="{{ path_for('admin.article.edit',{'id':article["id"]}) }}">Editer</a> |
-                    <a href="{{ path_for('admin.image.indexarticle',{'article':article["id"]}) }}">Images</a> |
-                    <a href="{{ path_for('admin.article.destroy',{'id':article["id"]}) }}">Supprimer</a>
+                    <a href="{{ path_for('admin.image.edit',{'article':1, 'id':1}) }}">Editer</a> |
+                    <a href="{{ path_for('admin.image.destroy',{'article':1, 'id':1}) }}">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}
@@ -60,10 +54,10 @@
         <tfoot>
             <tr>
                 <th rowspan="1" colspan="1">ID</th>
-                <th rowspan="1" colspan="1">Auteur</th>
-                <th rowspan="1" colspan="1">Iitre</th>
-                <th rowspan="1" colspan="1">Date Création</th>
-                <th rowspan="1" colspan="1">Date Edition</th>
+                <th rowspan="1" colspan="1">Article</th>
+                <th rowspan="1" colspan="1">Image</th>
+                <th rowspan="1" colspan="1">Légende</th>
+                <th rowspan="1" colspan="1">Status</th>
                 <th rowspan="1" colspan="1">Action</th>
             </tr>
         </tfoot>
