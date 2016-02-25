@@ -18,18 +18,12 @@
 					<h3 class="widget-user-username">Ibi victu recreati et quiete, postquam</h3>
 				</div>
 				<div class="box-body">
-					Ibi victu recreati et quiete, postquam abierat timor, vicos opulentos adorti equestrium adventu cohortium, quae casu propinquabant, nec resistere planitie porrecta conati digressi sunt retroque concedentes omne iuventutis robur relictum in sedibus acciverunt.
+					{{ article['contenu'] | raw }}
 					<br>
 					<br>
-					Illud tamen clausos vehementer angebat quod captis navigiis, quae frumenta vehebant per flumen, Isauri quidem alimentorum copiis adfluebant, ipsi vero solitarum rerum cibos iam consumendo inediae propinquantis aerumnas exitialis horrebant.
-					<br>
-					<br>
-					Etenim si attendere diligenter, existimare vere de omni hac causa volueritis, sic constituetis, iudices, nec descensurum quemquam ad hanc accusationem fuisse, cui, utrum vellet, liceret, nec, cum descendisset, quicquam habiturum spei fuisse, nisi alicuius intolerabili libidine et nimis acerbo odio niteretur. Sed ego Atratino, humanissimo atque optimo adulescenti meo necessario, ignosco, qui habet excusationem vel pietatis vel necessitatis vel aetatis. Si voluit accusare, pietati tribuo, si iussus est, necessitati, si speravit aliquid, pueritiae. Ceteris non modo nihil ignoscendum, sed etiam acriter est resistendum.
-					<br>
-					<br>
-					<a href="{{ path_for('admin.auteur.edit',{'id':1}) }}" class="btn bg-gray margin">Voir l'auteur associé</a>
-					<a href="{{ path_for('admin.article.edit',{'id':1}) }}" class="btn bg-gray margin">Editer</a>
-					<a href="{{ path_for('admin.article.destroy',{'id':1}) }}" class="btn bg-red margin">Supprimer</a>
+					<a href="{{ path_for('admin.auteur.show',{'id':article['auteur']['id']}) }}" class="btn bg-gray margin">Voir l'auteur ({{ article['auteur']['pseudo'] }})</a>
+					<a href="{{ path_for('admin.article.edit',{'id':article['id']}) }}" class="btn bg-gray margin">Editer</a>
+					<a href="{{ path_for('admin.article.destroy',{'id':article['id']}) }}" class="btn bg-red margin">Supprimer</a>
 				</div>
 			</div>
 		</div>
@@ -40,7 +34,7 @@
 					Localisation
 				</div>
 				<div class="box-body">
-					<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d20221.462281323966!2d3.1842616999999995!3d50.6887129!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sfr!2sfr!4v1455295848307" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+					<div id="carte" style="width:100%;height:450px"></div>
 				</div>
 			</div>
 		</div>
@@ -132,4 +126,18 @@
 			</div>
 		</div>
 	</div>
+{% endblock %}
+
+{% block starter_footer_js %}
+	<script type="text/javascript">
+        var coordonnee_long = {{ article['coordonnee_long'] }};
+        var coordonnee_lat  = {{ article['coordonnee_lat'] }};
+        var markers = [
+        	{
+        		coordonnee_long:{{ article['coordonnee_long'] }},
+        		coordonnee_lat:{{ article['coordonnee_lat'] }},
+        	}
+        ];
+		create_map_and_markers(coordonnee_lat, coordonnee_long, 9, markers)
+	</script>	
 {% endblock %}

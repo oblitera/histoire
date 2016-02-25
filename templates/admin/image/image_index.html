@@ -19,6 +19,9 @@
                     ID
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+                    Actif
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Article
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
@@ -26,9 +29,6 @@
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Légende
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-                    Status
                 </th>
                 <th tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Action
@@ -39,10 +39,10 @@
             {% for i in 0..15 %}
             <tr role="row" class="odd">
                 <td>{{ i }}</td>
+                <td><span style="color:green">oui</span></td>
                 <td>article {{ i }}</td>
                 <td>{{ i }}</td>                
                 <td>legende {{ i }}</td>
-                <td>ok</td>
                 <td class="action_rows_table">
                     <a href="{{ path_for('admin.image.edit',{'article':1, 'id':1}) }}?redirect=all">Editer</a> |
                     <a href="{{ path_for('admin.image.destroy',{'article':1, 'id':1}) }}?redirect=all">Supprimer</a>

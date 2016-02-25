@@ -20,6 +20,9 @@
                     ID
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+                    Actif
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Auteur
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
@@ -41,6 +44,13 @@
             <tr role="row" class="odd">
                 <td>{{ article["id"] }}</td>
                 <td>
+                    {% if article["actif"] == "1" %}
+                        <span style="color:green;">Oui</span>
+                    {% else %}
+                        <span style="color:red;">Non</span>
+                    {% endif %}
+                </td>
+                <td>
                     <a href="{{ path_for('admin.auteur.show',{'id':article["id"]}) }}">
                         {{ article["auteur_id"] }}
                     </a>
@@ -60,6 +70,7 @@
         <tfoot>
             <tr>
                 <th rowspan="1" colspan="1">ID</th>
+                <th rowspan="1" colspan="1">Actif</th>
                 <th rowspan="1" colspan="1">Auteur</th>
                 <th rowspan="1" colspan="1">Iitre</th>
                 <th rowspan="1" colspan="1">Date Création</th>

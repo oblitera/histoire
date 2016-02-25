@@ -25,7 +25,19 @@ class ControllerAdminArticle extends ControllerAdmin
 
 	public function show()
 	{
-		return $this->app->view->render($this->response, 'admin/article/article_show.html');
+		//initialisation
+		$cible = Article::with('auteur','images', 'commentaires')->find($this->args["id"]);
+
+		if(empty($cible))
+		{
+			return $this->redirect_inconnu();
+		}
+
+		$data = array(
+			"article" => $cible->toArray()
+		);
+
+		return $this->app->view->render($this->response, 'admin/article/article_show.html', $data);
 	}
 
 	public function create()
@@ -82,16 +94,10 @@ class ControllerAdminArticle extends ControllerAdmin
 			return $this->redirect_inconnu();
 		}
 
-		$validation = Article::validate($_POST);
+		$validation = Article::validate($_POST, true);
 		if($validation === true)
 		{
 			$cible::edit($cible, $_POST);
-
-			$images = $this->getPostImg();
-			if($images)
-			{
-
-			}
 
 			$this->app->flash->addMessage('success', ControllerAdminArticle::$MSG_UPDATE_VALIDE);
 

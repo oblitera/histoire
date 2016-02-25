@@ -12,7 +12,7 @@ class Article extends Model {
 		return $this->hasMany('Commentaire', 'article_id');
 	}
 
-	public function user()
+	public function auteur()
 	{
 		return $this->belongsTo('Auteur', 'auteur_id');
 	}
@@ -22,7 +22,8 @@ class Article extends Model {
 		return $this->hasMany('Image', 'article_id');
 	}
 
-	static function validate($data)
+
+	static function validate($data, $include_actif = false)
 	{
     	//Initialisation
     	Valitron\Validator::lang('fr');
@@ -43,6 +44,12 @@ class Article extends Model {
 
 		$v->rule('required'	, 'auteur_id')->label('L\'auteur');
 		$v->rule('integer', 'auteur_id')->label('L\'auteur');
+
+        if($include_actif)
+        {
+            $v->rule('required' , 'actif')->label('Le mot de passe');
+            $v->rule('integer', 'actif')->label('Le mot de passe');        
+        }
 
 		if($v->validate() === true)
 		{
@@ -73,6 +80,7 @@ class Article extends Model {
 		$cible->coordonnee_long = $data["coordonnee_long"];
 		$cible->coordonnee_lat = $data["coordonnee_lat"];
 		$cible->auteur_id = (int)$data["auteur_id"];
+		$cible->actif = (int)$data["actif"];
 		$cible->save();
     }
 

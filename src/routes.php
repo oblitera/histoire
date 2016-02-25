@@ -116,7 +116,7 @@ $app->post('/admin/article/edit/{id:[0-9]+}', function ($request, $response, $ar
 
 //destroy
 $app->get('/admin/article/destroy/{id:[0-9]+}', function ($request, $response, $args) {
-    $c = new ControllerAdminAuteur($this, $request, $response, $args);
+    $c = new ControllerAdminArticle($this, $request, $response, $args);
     return $c->destroy();
 })->setName('admin.article.destroy');
 
