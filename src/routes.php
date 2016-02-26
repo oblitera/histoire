@@ -9,6 +9,7 @@ include("models/Image.php");
 include("validations/Validation.php");
 include("validations/AuteurValidation.php");
 include("validations/ArticleValidation.php");
+include("validations/ImageValidation.php");
 
 //Controlleurs
 include("controllers/Controller.php");

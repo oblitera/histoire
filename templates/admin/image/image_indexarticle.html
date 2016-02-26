@@ -8,11 +8,57 @@
     liste
 {% endblock %}
 
+{% block admin_liste_before %}
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="box box-primary">
+        <div class="box-header">
+            <h3 class="box-title">Ajouter une images</h3>
+        </div>
+        <div class="box-body">
+            <form method="post" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="item_form" style="padding-left:10px;">
+                            <label>Légende de l'image</label>
+                            <input type="text" name="label_imgarticle"  class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="item_form">
+                            <label>Fichier image</label>
+                            <input type="file" name="imgarticle">
+                        </div>
+                    </div>
+                </div>
+                {% if errors['imgarticle'] is not empty %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="item_form">
+                                {% for erreur in errors['imgarticle'] %}
+                                    <span class="error_champs" style="padding-left:10px;">{{ erreur }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <input type="submit" value="Ajouter" class="btn bg-olive margin"> 
+                    </div>
+                </div>
+            </form>          
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
 {% block admin_liste_menu %}
+    <a type="button" class="btn bg-gray margin" href="{{ path_for('admin.article.show',{'id':1}) }}">Revenir à l'article</a>
 {% endblock %}
 
 {% block admin_liste_table %}
-    <a type="button" class="btn bg-gray margin" href="{{ path_for('admin.article.show',{'id':1}) }}">Revenir à l'article</a>
     <table id="table_d_1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_d_1_info">
         <thead>
             <tr role="row">
