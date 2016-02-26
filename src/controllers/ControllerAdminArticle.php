@@ -111,7 +111,7 @@ class ControllerAdminArticle extends ControllerAdmin
 		}		
 
 		$data = array(
-			'values' => $cible->toArray(),
+			'values' => $_POST,
 			'auteurs' => Auteur::all()->toArray()
 		);
 		$data = array_merge($data, $validation);
