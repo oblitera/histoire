@@ -22,46 +22,6 @@ class Article extends Model {
 		return $this->hasMany('Image', 'article_id');
 	}
 
-
-	static function validate($data, $include_actif = false)
-	{
-    	//Initialisation
-    	Valitron\Validator::lang('fr');
-		$v = new Valitron\Validator($data);
-
-		//condition
-		$v->rule('required'	, 'titre')->label('Le titre');
-		$v->rule('lengthMin', 'titre', 5)->label('Le titre');
-
-		$v->rule('required'	, 'contenu')->label('Le contenu');
-		$v->rule('lengthMin', 'contenu', 10)->label('Le contenu');
-
-		$v->rule('required'	, 'coordonnee_long')->label('La longitude');
-		$v->rule('numeric', 'coordonnee_long')->label('La longitude');
-
-		$v->rule('required'	, 'coordonnee_lat')->label('La latitude');
-		$v->rule('numeric', 'coordonnee_lat')->label('La latitude');
-
-		$v->rule('required'	, 'auteur_id')->label('L\'auteur');
-		$v->rule('integer', 'auteur_id')->label('L\'auteur');
-
-        if($include_actif)
-        {
-            $v->rule('required' , 'actif')->label('Le mot de passe');
-            $v->rule('integer', 'actif')->label('Le mot de passe');        
-        }
-
-		if($v->validate() === true)
-		{
-			return true;
-		}
-
-		return $erreurs = array(
-			"errors"	=> $v->errors(),
-			"values"	=> $data
-		);		
-	}
-
     static function add($data)
     {
     	$article = new Article();

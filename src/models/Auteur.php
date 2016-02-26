@@ -12,46 +12,6 @@ class Auteur extends Model {
 		return $this->hasMany('Article', 'auteur_id');
 	}
 
-    static function validate($data, $include_mdp = true, $include_actif = false)
-    {
-    	//Initialisation
-    	Valitron\Validator::lang('fr');
-		$v = new Valitron\Validator($data);
-
-		//condition
-		$v->rule('required'	, 'pseudo')->label('Le nom');
-		$v->rule('lengthMax', 'pseudo', 30)->label('Le nom');
-		$v->rule('lengthMin', 'pseudo', 3)->label('Le nom');
-
-		if($include_mdp)
-		{
-			$v->rule('required'	, 'mdp')->label('Le mot de passe');
-			$v->rule('lengthMax', 'mdp', 30)->label('Le mot de passe');
-			$v->rule('lengthMin', 'mdp', 5)->label('Le mot de passe');			
-		}
-
-        if($include_actif)
-        {
-            $v->rule('required' , 'actif')->label('Le mot de passe');
-            $v->rule('integer', 'actif')->label('Le mot de passe');        
-        }
-
-		$v->rule('required'	, 'email')->label('L\'email');
-		$v->rule('lengthMax', 'email', 50)->label('L\'email');
-		$v->rule('lengthMin', 'email', 3)->label('L\'email');
-		$v->rule('email'	, 'email')->label('L\'email');
-
-
-		if($v->validate() === true)
-		{
-			return true;
-		}
-
-		return $erreurs = array(
-			"errors"	=> $v->errors(),
-			"values"	=> $data
-		);
-    }
 
     static function add($data)
     {
@@ -68,61 +28,5 @@ class Auteur extends Model {
 		$cible->email = $data["email"];
         $cible->actif = $data["actif"];
 		$cible->save();
-    }
-
-    static function isValidePass($data)
-    {
-        Valitron\Validator::lang('fr');
-        $v = new Valitron\Validator($data);
-
-        $v->rule('required' , 'mdp')->label('Le mot de passe');
-        $v->rule('lengthMax', 'mdp', 30)->label('Le mot de passe');
-        $v->rule('lengthMin', 'mdp', 5)->label('Le mot de passe'); 
-
-        if($v->validate() === true)
-        {
-            return true;
-        }
-
-        return $erreurs = array(
-            "errors"    => $v->errors(),
-            "values"    => $data
-        ); 
-    }
-
-    static function isUniqueEmail($email)
-    {
-    	$recherche = self::where('email', '=', $email)->get()->toArray();
-    	return (empty($recherche)) ? true : false;
-    }
-
-    static function isUniquePseudo($pseudo)
-    {
-    	$recherche = self::where('pseudo', '=', $pseudo)->get()->toArray();
-    	return (empty($recherche)) ? true : false;
-    }
-
-    static function isValidUpdateEmail($oldEmail, $newEmail)
-    {
-    	if($oldEmail == $newEmail)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return self::isUniqueEmail($newEmail);
-    	}
-    }
-
-    static function isValidUpdatePseudo($oldPseudo, $newPseudo)
-    {
-    	if($oldPseudo == $newPseudo)
-    	{
-    		return true;
-    	}
-    	else
-    	{
-    		return self::isUniquePseudo($newPseudo);
-    	}
     }
 }

@@ -8,8 +8,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 	static $MSG_CREATE_VALIDE 		= "Auteur ajouter avec succés";
 	static $MSG_DELETE_VALIDE 		= "Auteur supprimer avec succés";
 	static $ERROR_INCONNU 			= "Auteur inconnu, opération annulée";
-	static $ERROR_PSEUDO_DUPLI		= "Ce pseudo est déjà utilisé";
-	static $ERROR_EMAIL_DUPLI		= "Cet email est déjà utilisé";
+
 
 	public function init()
 	{
@@ -64,48 +63,23 @@ class ControllerAdminAuteur extends ControllerAdmin
 
 	public function store()
 	{
-		$validation = Auteur::validate($_POST);
-
+		//on tente l'édition !
+		$validation = AuteurValidation::validate_created($_POST);
 	    if($validation === true)
 	    {
-	    	$uniqueEmail = Auteur::isUniqueEmail($_POST['email']);
-	    	$uniquePseudo = Auteur::isUniquePseudo($_POST['pseudo']);
-	    	
-	    	if($uniqueEmail && $uniquePseudo)
-	    	{
-			    Auteur::add($_POST);
-				$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_CREATE_VALIDE);
-				$route = $this->app->router->pathFor('admin.auteur.index',[]);
-		    	return $this->response->withStatus(301)->withHeader('Location', $route);
-	    	}
-	    	elseif(!$uniqueEmail && !$uniquePseudo)
-	    	{
-				$validation = array(
-					'errors' => array(
-						'email'  => [self::$ERROR_PSEUDO_DUPLI],
-						'pseudo' => [self::$ERROR_EMAIL_DUPLI]
-					),
-					'values' => $_POST
-				);
-	    	}
-	    	elseif(!$uniqueEmail)
-	    	{
-				$validation = array(
-					'errors' => array(
-						'email' => [self::$ERROR_EMAIL_DUPLI]
-					),
-					'values' => $_POST
-				);	    		
-	    	}
-	    	else
-	    	{
-				$validation = array(
-					'errors' => array(
-						'pseudo' => [self::$ERROR_PSEUDO_DUPLI]
-					),
-					'values' => $_POST
-				);
-	    	}
+		    Auteur::add($_POST);
+
+			$this->app
+				 ->flash
+				 ->addMessage('success', ControllerAdminAuteur::$MSG_CREATE_VALIDE);
+
+			$route = $this->app
+						  ->router
+						  ->pathFor('admin.auteur.index',[]);
+
+	    	return $this->response
+	    				->withStatus(301)
+	    				->withHeader('Location', $route);
 	    }	
 
 	    return $this->app->view->render($this->response, 'admin/auteur/auteur_add.html', $validation);
@@ -144,58 +118,25 @@ class ControllerAdminAuteur extends ControllerAdmin
 			return $this->redirect_inconnu();
 		}
 
-		//go validation !
-		$validation = Auteur::validate($_POST, false);
-	    if($validation === true)
-	    {
-	    	$uniqueEmail 	= Auteur::isValidUpdateEmail($cible->email, $_POST['email']);
-	    	$uniquePseudo 	= Auteur::isValidUpdatePseudo($cible->pseudo, $_POST['pseudo']);
+		//on tente l'édition !
+		$validation = AuteurValidation::validate_update($_POST, $cible->email, $cible->pseudo);
+		if($validation === true)
+		{
+    		Auteur::edit($cible, $_POST);
 
-	    	if($uniqueEmail && $uniquePseudo)
-	    	{
-	    		Auteur::edit($cible, $_POST);
+    		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_UPDATE_VALIDE);
 
-	    		$this->app->flash->addMessage('success', ControllerAdminAuteur::$MSG_UPDATE_VALIDE);
+    		$route = $this->app
+    					  ->router
+    					  ->pathFor('admin.auteur.index',[]);
 
-	    		$route = $this->app
-	    					  ->router
-	    					  ->pathFor('admin.auteur.index',[]);
+        	return $this->response
+        				->withStatus(301)
+        				->withHeader('Location', $route);	
+		}
 
-	        	return $this->response
-	        				->withStatus(301)
-	        				->withHeader('Location', $route);		    		
-	    	}
-	    	elseif(!$uniqueEmail && !$uniquePseudo)
-	    	{
-				$validation = array(
-					'errors' => array(
-						'email'  => [self::$ERROR_PSEUDO_DUPLI],
-						'pseudo' => [self::$ERROR_EMAIL_DUPLI]
-					),
-					'values' => $_POST
-				);
-	    	}
-	    	elseif(!$uniqueEmail)
-	    	{
-				$validation = array(
-					'errors' => array(
-						'email' => [self::$ERROR_EMAIL_DUPLI]
-					),
-					'values' => $_POST
-				);	    		
-	    	}
-	    	else
-	    	{
-				$validation = array(
-					'errors' => array(
-						'pseudo' => [self::$ERROR_PSEUDO_DUPLI]
-					),
-					'values' => $_POST
-				);
-	    	}
-	    }
-
-	    return $this->app
+		//si c'est pas ok : /
+		return $this->app
 	    			->view
 	    			->render($this->response, 'admin/auteur/auteur_edit.html', $validation);
 	}
@@ -220,7 +161,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 			return $this->redirect_inconnu();
 		}
 
-		$validation = Auteur::isValidePass($_POST);
+		$validation = AuteurValidation::isValidePass($_POST);
 		if($validation === true)
 		{
 			$cible->mdp = md5($data["mdp"]);

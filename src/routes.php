@@ -5,6 +5,11 @@ include("models/Auteur.php");
 include("models/Commentaire.php");
 include("models/Image.php");
 
+// validation
+include("validations/Validation.php");
+include("validations/AuteurValidation.php");
+include("validations/ArticleValidation.php");
+
 //Controlleurs
 include("controllers/Controller.php");
 include("controllers/ControllerAdmin.php");

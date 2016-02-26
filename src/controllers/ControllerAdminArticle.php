@@ -55,7 +55,7 @@ class ControllerAdminArticle extends ControllerAdmin
 			"auteurs" => Auteur::all()->toArray()
 		);
 
-		$validation = Article::validate($_POST);
+		$validation = ArticleValidation::validate_created($_POST);
 		if($validation === true)
 		{
 			Article::add($_POST);
@@ -94,7 +94,7 @@ class ControllerAdminArticle extends ControllerAdmin
 			return $this->redirect_inconnu();
 		}
 
-		$validation = Article::validate($_POST, true);
+		$validation = ArticleValidation::validate_created($_POST, true);
 		if($validation === true)
 		{
 			$cible::edit($cible, $_POST);
