@@ -36,16 +36,24 @@
             </tr>
         </thead>
         <tbody>
-            {% for i in 0..15 %}
+            {% for image in images %}
             <tr role="row" class="odd">
-                <td>{{ i }}</td>
-                <td><span style="color:green">oui</span></td>
-                <td>article {{ i }}</td>
-                <td>{{ i }}</td>                
-                <td>legende {{ i }}</td>
+                <td>{{ image['id'] }}</td>
+                <td>
+                    {% if image["actif"] == "1" %}
+                        <span style="color:green;">Oui</span>
+                    {% else %}
+                        <span style="color:red;">Non</span>
+                    {% endif %}
+                </td>
+                <td>{{ image['article']['titre'] }}</td>
+                <td>
+                    <img src="{{ imgUrl }}articles/{{ image["src"] }}" width="100px">
+                </td>                
+                <td>{{ image['legende'] }}</td>
                 <td class="action_rows_table">
-                    <a href="{{ path_for('admin.image.edit',{'article':1, 'id':1}) }}?redirect=all">Editer</a> |
-                    <a href="{{ path_for('admin.image.destroy',{'article':1, 'id':1}) }}?redirect=all">Supprimer</a>
+                    <a href="{{ path_for('admin.image.edit',{'id':image['id']}) }}?redirect=all">Editer</a> |
+                    <a href="{{ path_for('admin.image.destroy',{'id':image['id']}) }}?redirect=all">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}
@@ -53,10 +61,10 @@
         <tfoot>
             <tr>
                 <th rowspan="1" colspan="1">ID</th>
+                <th rowspan="1" colspan="1">Status</th>
                 <th rowspan="1" colspan="1">Article</th>
                 <th rowspan="1" colspan="1">Image</th>
-                <th rowspan="1" colspan="1">Légende</th>
-                <th rowspan="1" colspan="1">Status</th>
+                <th rowspan="1" colspan="1">Légende</th>                
                 <th rowspan="1" colspan="1">Action</th>
             </tr>
         </tfoot>

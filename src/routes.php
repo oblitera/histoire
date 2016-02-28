@@ -1,4 +1,7 @@
 <?php
+// Tools
+include("libraries/Tools.php");
+
 // Modeles
 include("models/Article.php");
 include("models/Auteur.php");
@@ -156,18 +159,18 @@ $app->post('/admin/image/index/{article:[0-9]+}', function ($request, $response,
 })->setName('admin.image.store');
 
 //edit
-$app->get('/admin/image/edit/{article:[0-9]+}/{id:[0-9]+}', function ($request, $response, $args) {
+$app->get('/admin/image/edit/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAdminImage($this, $request, $response, $args);
     return $c->edit();
 })->setName('admin.image.edit');
 
-$app->post('/admin/image/edit/{article:[0-9]+}/{id:[0-9]+}', function ($request, $response, $args) {
+$app->post('/admin/image/edit/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAdminImage($this, $request, $response, $args);
     return $c->update();
 })->setName('admin.image.update');
 
 //destroy
-$app->get('/admin/image/destroy/{article:[0-9]+}/{id:[0-9]+}', function ($request, $response, $args) {
+$app->get('/admin/image/destroy/{id:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAdminImage($this, $request, $response, $args);
     return $c->destroy();
 })->setName('admin.image.destroy');

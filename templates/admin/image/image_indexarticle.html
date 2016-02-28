@@ -1,7 +1,7 @@
 {% extends "admin/admin_liste.html" %}
 
 {% block starter_h1 %}
-    Images de l'Article "ffffff"
+    Images de l'Article "{{ article["titre"] }}"
 {% endblock %}
 
 {% block starter_h1_complement %}
@@ -55,7 +55,7 @@
 {% endblock %}
 
 {% block admin_liste_menu %}
-    <a type="button" class="btn bg-gray margin" href="{{ path_for('admin.article.show',{'id':1}) }}">Revenir à l'article</a>
+    <a type="button" class="btn bg-gray margin" href="{{ path_for('admin.article.show',{'id': article["id"]}) }}">Revenir à l'article</a>
 {% endblock %}
 
 {% block admin_liste_table %}
@@ -66,7 +66,7 @@
                     ID
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-                    Article
+                    Actif
                 </th>
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Image
@@ -74,25 +74,29 @@
                 <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Légende
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
-                    Status
-                </th>
                 <th tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
                     Action
                 </th>
             </tr>
         </thead>
         <tbody>
-            {% for i in 0..5 %}
+            {% for image in article["images"] %}
             <tr role="row" class="odd">
-                <td>{{ i }}</td>
-                <td>article {{ i }}</td>
-                <td>{{ i }}</td>                
-                <td>legende {{ i }}</td>
-                <td>ok</td>
+                <td>{{ image["id"] }}</td>
+                <td>
+                    <img src="{{ imgUrl }}articles/{{ image["src"] }}" width="100px">
+                </td>                
+                <td>{{ image["legende"] }}</td>
+                <td>
+                    {% if image["actif"] == "1" %}
+                        <span style="color:green;">Oui</span>
+                    {% else %}
+                        <span style="color:red;">Non</span>
+                    {% endif %}
+                </td>
                 <td class="action_rows_table">
-                    <a href="{{ path_for('admin.image.edit',{'article':1, 'id':1}) }}">Editer</a> |
-                    <a href="{{ path_for('admin.image.destroy',{'article':1, 'id':1}) }}">Supprimer</a>
+                    <a href="{{ path_for('admin.image.edit',{'id':image["id"]}) }}">Editer</a> |
+                    <a href="{{ path_for('admin.image.destroy',{'id':image["id"]}) }}">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}
@@ -100,11 +104,10 @@
         <tfoot>
             <tr>
                 <th rowspan="1" colspan="1">ID</th>
-                <th rowspan="1" colspan="1">Article</th>
+                <th rowspan="1" colspan="1">Action</th>
                 <th rowspan="1" colspan="1">Image</th>
                 <th rowspan="1" colspan="1">Légende</th>
-                <th rowspan="1" colspan="1">Status</th>
-                <th rowspan="1" colspan="1">Action</th>
+                <th rowspan="1" colspan="1">Status</th>                
             </tr>
         </tfoot>
     </table>

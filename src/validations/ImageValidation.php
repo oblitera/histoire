@@ -7,18 +7,8 @@ class ImageValidation
     static $ERROR_IMG_SIZE      = "La taille doit être inférieur à 2Mo";
     static $ERROR_IMG_FOMAT     = "Les formats autorisées sont : ";
 
-    static function validate_created($data)
-    {
-        $validation = self::validate_post($data);
-        if($validation !== true)
-        {
-            return $validation;
-        }
 
-        return true;
-    }
-
-    static function validate_post($data)
+    static function validate_post_img($data)
     {
         $reponse = Validation::init_reponse();
         $reponse["values"]["imgarticle"] = $data;
@@ -42,7 +32,7 @@ class ImageValidation
             return $reponse;
         }  
 
-        if($data["imgarticle"]["size"] > 200000)
+        if($data["imgarticle"]["size"] > 2000000)
         {
             $reponse["errors"]["imgarticle"][] = self::$ERROR_IMG_SIZE;
             return $reponse;
@@ -57,5 +47,42 @@ class ImageValidation
 	    return true;	    
     }
 
+    static function validate_legende($data)
+    {
+        //Initialisation
+        Valitron\Validator::lang('fr');
+        $v = new Valitron\Validator($data);
 
+        //condition
+        $v->rule('required' , 'legende')->label('Le titre');
+        $v->rule('lengthMin', 'legende', 5)->label('Le titre');
+
+        if($v->validate() === true)
+        {
+            return true;
+        }
+
+        $reponse["errors"] = $v->errors();
+        return $reponse;
+    }
+
+    static function validate_actif($data)
+    {
+        //Initialisation
+        Valitron\Validator::lang('fr');
+        $v = new Valitron\Validator($data);
+
+        //condition
+        $v->rule('required' , 'actif')->label('Actif');
+        $v->rule('integer', 'actif')->label('Actif'); 
+
+
+        if($v->validate() === true)
+        {
+            return true;
+        }
+
+        $reponse["errors"] = $v->errors();
+        return $reponse;
+    }
 }

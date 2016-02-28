@@ -46,23 +46,19 @@
 					Images associées
 				</div>
 				<div class="box-body">
-					<div class="col-lg-2">
-						<img src="http://galerie.alittlemarket.com/galerie/sell/1014171/photos-ancien-commerce-boucherie-velo-tri-7739219-0131-copie-nb-d6a6a-d663f_big.jpg" width="100%">
-					</div>
-					<div class="col-lg-2">
-						<img src="http://galerie.alittlemarket.com/galerie/sell/1014171/photos-ancien-commerce-boucherie-velo-tri-7739219-0131-copie-nb-d6a6a-d663f_big.jpg" width="100%">
-					</div>
-					<div class="col-lg-2">
-						<img src="http://galerie.alittlemarket.com/galerie/sell/1014171/photos-ancien-commerce-boucherie-velo-tri-7739219-0131-copie-nb-d6a6a-d663f_big.jpg" width="100%">
-					</div>
-					<div class="col-lg-2">
-						<img src="http://galerie.alittlemarket.com/galerie/sell/1014171/photos-ancien-commerce-boucherie-velo-tri-7739219-0131-copie-nb-d6a6a-d663f_big.jpg" width="100%">
-					</div>
-					<div class="col-lg-2">
-						<img src="http://galerie.alittlemarket.com/galerie/sell/1014171/photos-ancien-commerce-boucherie-velo-tri-7739219-0131-copie-nb-d6a6a-d663f_big.jpg" width="100%">
-					</div>
-					<div class="col-lg-2">
-						<img src="http://galerie.alittlemarket.com/galerie/sell/1014171/photos-ancien-commerce-boucherie-velo-tri-7739219-0131-copie-nb-d6a6a-d663f_big.jpg" width="100%">
+					<div class="row">
+						{% for key, image in article["images"] %}
+							{% if key != 0 %}
+								{% if key is divisibleby(6) %}
+									</div>
+									<br>
+									<div class="row">
+								{% endif %}
+							{% endif %}
+							<div class="col-lg-2">
+								<img src="{{ imgUrl }}articles/{{ image["src"] }}" width="100%">
+							</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>

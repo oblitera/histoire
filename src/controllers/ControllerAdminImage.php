@@ -16,37 +16,31 @@ class ControllerAdminImage extends ControllerAdmin
 
 	public function index()
 	{
+		$data = array(
+			"images" => Image::with('article')->get()
+		);
+
 		return $this->app
 					->view
-					->render($this->response, 'admin/image/image_index.html');
+					->render($this->response, 'admin/image/image_index.html', $data);
 	}
 
 	public function indexarticle()
 	{
 		//initialisation
-		$article = Article::find($this->args["article"]);
+		$article = Article::with('images')->find($this->args["article"]);
 		if(empty($article))
 		{
 			return $this->redirect_inconnu();
 		}
 
-		return $this->app
-					->view
-					->render($this->response, 'admin/image/image_indexarticle.html');
-	}
+		$data = array(
+			"article" => $article->toArray()
+		);
 
-	public function show()
-	{
 		return $this->app
 					->view
-					->render($this->response, 'admin/image/image_show.html');
-	}
-
-	public function create()
-	{
-		return $this->app
-					->view
-					->render($this->response, 'admin/image/image_add.html');
+					->render($this->response, 'admin/image/image_indexarticle.html', $data);
 	}
 
 	public function store()
@@ -58,16 +52,24 @@ class ControllerAdminImage extends ControllerAdmin
 			return $this->redirect_inconnu();
 		}
 
-		$validation = ImageValidation::validate_created($_FILES);
+		$legende = "" ;
+		if(ImageValidation::validate_legende($_POST) === true)
+		{
+			$legende = $_POST["legende"];
+		}
+
+		$validation = ImageValidation::validate_post_img($_FILES);
 	    if($validation === true)
 	    {
+	    	Image::add($_FILES, $legende, $article);
+
 			$this->app
 				 ->flash
 				 ->addMessage('success', self::$MSG_CREATE_VALIDE);
 
 			$route = $this->app
 						  ->router
-						  ->pathFor('admin.image.indexarticle',["article" => 1]);
+						  ->pathFor('admin.image.indexarticle',["article" => $article->id]);
 
 	    	return $this->response
 	    				->withStatus(301)
@@ -81,18 +83,57 @@ class ControllerAdminImage extends ControllerAdmin
 
 	public function edit()
 	{
-		return $this->app->view->render($this->response, 'admin/image/image_edit.html');
+		$image = Image::find($this->args["id"]);
+		if(empty($image))
+		{
+			return $this->redirect_inconnu();
+		}
+
+		$data = array(
+			"article"	=> $article,
+			"values"	=> $image->toArray()
+		);
+
+		return $this->app->view->render($this->response, 'admin/image/image_edit.html', $data);
 	}
 
 	public function update()
 	{
+		$image = Image::with('article')->find($this->args["id"]);
+		if(empty($image))
+		{
+			return $this->redirect_inconnu();
+		}
+
+		$validation = ImageValidation::validate_post_img($_FILES);
+	    if($validation === true)
+	    {
+	    	Image::edit_file($image, $_FILES);
+	    }
+
+	    $legende = "";	   
+		if(ImageValidation::validate_legende($_POST) === true)
+		{
+			$legende = $_POST["legende"];
+		}
+
+	    $actif = "0";	   
+		if(ImageValidation::validate_actif($_POST) === true)
+		{
+			$actif = $_POST["actif"];
+		}
+
+		$image->legende = $legende;
+		$image->actif = $actif;
+		$image->save();
+
 		$this->app->flash->addMessage('success', self::$MSG_UPDATE_VALIDE);
 
 		if(empty($_GET["redirect"]))
 		{
 			$route = $this->app
 						  ->router
-						  ->pathFor('admin.image.indexarticle',["article" => 1]);	
+						  ->pathFor('admin.image.indexarticle',["article" => $image["article"]["id"]]);	
 		}
 		else
 		{
