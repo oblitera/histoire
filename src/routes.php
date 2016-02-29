@@ -13,6 +13,7 @@ include("validations/Validation.php");
 include("validations/AuteurValidation.php");
 include("validations/ArticleValidation.php");
 include("validations/ImageValidation.php");
+include("validations/CommentaireValidation.php");
 
 //Controlleurs
 include("controllers/Controller.php");
@@ -195,12 +196,12 @@ $app->get('/admin/commentaire/show/{id:[0-9]+}', function ($request, $response, 
 })->setName('admin.commentaire.show');
 
 //add
-$app->get('/admin/commentaire/create', function ($request, $response, $args) {
+$app->get('/admin/commentaire/create/{article:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAdminCommentaire($this, $request, $response, $args);
     return $c->create();
 })->setName('admin.commentaire.create');
 
-$app->post('/admin/commentaire/create', function ($request, $response, $args) {
+$app->post('/admin/commentaire/create/{article:[0-9]+}', function ($request, $response, $args) {
     $c = new ControllerAdminCommentaire($this, $request, $response, $args);
     return $c->store();
 })->setName('admin.commentaire.store');

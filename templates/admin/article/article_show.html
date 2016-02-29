@@ -71,6 +71,7 @@
 					Commentaires associées
 				</div>
 				<div class="box-body">
+					<a href="{{ path_for('admin.commentaire.create',{'article':article['id']}) }}" class="btn bg-gray margin">Ajouter un commentaire</a>
 					<table id="table_d_1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_d_1_info">
 						<thead>
 							<tr role="row">
@@ -92,16 +93,15 @@
 							</tr>
 						</thead>
 						<tbody>
-							{% for i in 0..20 %}
+							{% for commentaire in article['commentaires'] %}
 							<tr role="row" class="odd">
-								<td>{{ i }}</td>
-								<td>pseudo{{ i }}</td>
+								<td>{{ commentaire['id'] }}</td>
+								<td>{{ commentaire['auteur_id'] }}</td>
 								<td>
-									Ideoque fertur neminem aliquando ob haec vel similia poenae addictum oblato de more elogio revocari iussisse...
+									{{ commentaire['contenu'] }}
 								</td>
 								<td>2016-01-01</td>
 								<td class="action_rows_table">
-									<a href="{{ path_for('admin.commentaire.show',{'id':1}) }}">Voir</a> |
 									<a href="{{ path_for('admin.commentaire.edit',{'id':1}) }}">Editer</a> |
 									<a href="{{ path_for('admin.commentaire.destroy',{'id':1}) }}">Supprimer</a>
 								</td>

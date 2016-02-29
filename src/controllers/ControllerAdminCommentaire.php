@@ -26,14 +26,61 @@ class ControllerAdminCommentaire extends ControllerAdmin
 
 	public function create()
 	{
-		return $this->app->view->render($this->response, 'admin/commentaire/commentaire_add.html');
+		//initialisation
+		$article = Article::find($this->args["article"]);
+		if(empty($article))
+		{
+			return $this->redirect_inconnu();
+		}
+
+		$data = array(
+			"auteurs" => Auteur::all()->toArray(),
+			"article" => $article->toArray()
+		);
+
+		return $this->app
+					->view
+					->render($this->response, 'admin/commentaire/commentaire_add.html', $data);
 	}
 
 	public function store()
 	{
-		$this->app->flash->addMessage('success', ControllerAdminCommentaire::$MSG_CREATE_VALIDE);
-		$route = $this->app->router->pathFor('admin.commentaire.index',[]);
-    	return $this->response->withStatus(301)->withHeader('Location', $route);
+		//initialisation
+		$article = Article::find($this->args["article"]);
+		if(empty($article))
+		{
+			return $this->redirect_inconnu();
+		}
+
+		$validation = CommentaireValidation::validate_post($_POST);
+		if($validation === true)
+		{
+			Commentaire::add($article, $_POST);
+
+			$this->app
+				 ->flash
+				 ->addMessage('success', ControllerAdminCommentaire::$MSG_CREATE_VALIDE);
+
+			$route = $this->app
+						  ->router
+						  ->pathFor('admin.article.show',['id' => $article->id]);
+
+	    	return $this->response
+	    				->withStatus(301)
+	    				->withHeader('Location', $route);
+		}
+
+		$data = array(
+			"auteurs" => Auteur::all()->toArray(),
+			"article" => $article->toArray(),
+			"values"  => $validation["values"],
+			"errors"  => $validation["errors"]
+		);
+
+
+		return $this->app
+					->view
+					->render($this->response, 'admin/commentaire/commentaire_add.html', $data);
 	}
 
 	public function edit()

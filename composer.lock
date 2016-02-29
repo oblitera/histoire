@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "hash": "46fdf93c394ab4d18d1a5c30985ec307",
-    "content-hash": "af2043d6a17867f1295fbd32c98684f9",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -918,7 +917,7 @@
         },
         {
             "name": "symfony/translation",
-            "version": "v3.0.2",
+            "version": "v3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
