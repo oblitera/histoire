@@ -11,7 +11,7 @@ class ControllerAdminArticle extends ControllerAdmin
 	public function init()
 	{
 		parent::init();
-		$this->setSection(ControllerAdminArticle::$MSG_SECTION);
+		$this->setSection(self::$MSG_SECTION);
 	}
 
 	public function index()

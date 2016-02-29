@@ -18,6 +18,7 @@ include("validations/CommentaireValidation.php");
 //Controlleurs
 include("controllers/Controller.php");
 include("controllers/ControllerAdmin.php");
+include("controllers/ControllerAdminTableau.php");
 include("controllers/ControllerAdminArticle.php");
 include("controllers/ControllerAdminAuteur.php");
 include("controllers/ControllerAdminCommentaire.php");
@@ -27,6 +28,17 @@ include("controllers/ControllerAuteur.php");
 include("controllers/ControllerCommentaire.php");
 include("controllers/ControllerImage.php");
 
+
+
+//----------------------
+// Tableau de bord
+//----------------------
+
+//view
+$app->get('/admin/', function ($request, $response, $args) {
+    $c = new ControllerAdminTableau($this, $request, $response, $args);
+    return $c->index();   
+})->setName('admin.index');
 
 
 

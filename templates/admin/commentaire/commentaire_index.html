@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block admin_liste_menu %}
-	<a type="button" class="btn bg-olive margin" href="{{ path_for('admin.commentaire.create') }}">Ajouter un commentaire</a>
 {% endblock %}
 
 {% block admin_liste_table %}
@@ -18,6 +17,9 @@
 			<tr role="row">
 				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
 					ID
+				</th>
+				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+					Actif
 				</th>
 				<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
 					Auteur
@@ -37,25 +39,32 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% for i in 0..20 %}
+			{% for commentaire in commentaires %}
 			<tr role="row" class="odd">
-				<td>{{ i }}</td>
+				<td>{{ commentaire["id"] }}</td>
+                <td>
+                    {% if commentaire["actif"] == "1" %}
+                        <span style="color:green;">Oui</span>
+                    {% else %}
+                        <span style="color:red;">Non</span>
+                    {% endif %}
+                </td>
 				<td>
-					<a href="{{ path_for('admin.auteur.show',{'id':1}) }}">
-						pseudo{{ i }}
+					<a href="{{ path_for('admin.auteur.show',{'id':commentaire["auteur"]["id"]}) }}">
+						 {{ commentaire["auteur"]["pseudo"] }}
 					</a>
 				</td>
 				<td>
-					<a href="{{ path_for('admin.article.show',{'id':1}) }}">
-						Titre de l'article {{ i }}
+					<a href="{{ path_for('admin.article.show',{'id':commentaire["article"]["id"]}) }}">
+						{{ commentaire["article"]["titre"] }}
 					</a>
 				</td>
-				<td>Commentaire {{ i }}</td>
+				<td>{{ commentaire["contenu"]|striptags }}</td>
 				<td>2016-01-01</td>
 				<td class="action_rows_table">
-					<a href="{{ path_for('admin.commentaire.show',{'id':1}) }}">Voir</a> |
-					<a href="{{ path_for('admin.commentaire.edit',{'id':1}) }}">Editer</a> |
-					<a href="{{ path_for('admin.commentaire.destroy',{'id':1}) }}">Supprimer</a>
+					<a href="{{ path_for('admin.commentaire.show',{'id':commentaire["id"]}) }}">Voir</a> |
+					<a href="{{ path_for('admin.commentaire.edit',{'id':commentaire["id"]}) }}?redirect=all">Editer</a> |
+					<a href="{{ path_for('admin.commentaire.destroy',{'id':commentaire["id"]}) }}?redirect=all" class="alert_link">Supprimer</a>
 				</td>
 			</tr>
 			{% endfor %}
@@ -63,6 +72,7 @@
 		<tfoot>
 			<tr>
 				<th rowspan="1" colspan="1">ID</th>
+				<th rowspan="1" colspan="1">Actif</th>
 				<th rowspan="1" colspan="1">Auteur</th>
 				<th rowspan="1" colspan="1">Article</th>
 				<th rowspan="1" colspan="1">Contenu</th>

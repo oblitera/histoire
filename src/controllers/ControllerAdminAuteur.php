@@ -13,7 +13,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 	public function init()
 	{
 		parent::init();
-		$this->setSection(ControllerAdminAuteur::$MSG_SECTION);
+		$this->setSection(self::$MSG_SECTION);
 	}
 
 
@@ -35,7 +35,7 @@ class ControllerAdminAuteur extends ControllerAdmin
 	public function show()
 	{
 		//initialisation
-		$cible = Auteur::find($this->args["id"]);
+		$cible = Auteur::with('articles', 'commentaires')->find($this->args["id"]);
 		if(empty($cible))
 		{
 			return $this->redirect_inconnu();

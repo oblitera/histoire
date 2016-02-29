@@ -12,7 +12,11 @@ class Auteur extends Model {
 		return $this->hasMany('Article', 'auteur_id');
 	}
 
-
+	public function commentaires()
+	{
+		return $this->hasMany('Commentaire', 'auteur_id');
+	}
+	
     static function add($data)
     {
     	$auteur = new Auteur();

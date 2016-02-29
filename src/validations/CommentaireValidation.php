@@ -2,7 +2,7 @@
 
 class CommentaireValidation
 {
-    static function validate_post($data, $include_actif = false)
+    static function validate_post($data, $include_auteur = false, $include_actif = false)
     {
     	//Initialisation
     	$v = Validation::get_validateur($data);
@@ -13,8 +13,11 @@ class CommentaireValidation
 		$v->rule('required'	, 'contenu')->label('Le message');
 		$v->rule('lengthMin', 'contenu', 6)->label('Le message');
 
-        $v->rule('required' , 'auteur_id')->label('Le message');
-        $v->rule('integer', 'auteur_id')->label('Le message');
+        if($include_auteur)
+        {
+            $v->rule('required' , 'auteur_id')->label('Auteur');
+            $v->rule('integer', 'auteur_id')->label('Auteur');
+        }
 
         if($include_actif)
         {

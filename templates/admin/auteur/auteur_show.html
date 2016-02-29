@@ -33,7 +33,7 @@
 							<center>
 								<a href="{{ path_for('admin.auteur.edit',{'id':auteur["id"]}) }}" class="btn bg-gray margin">Editer</a>
 								<a href="{{ path_for('admin.auteur.editmdp',{'id':auteur["id"]}) }}" class="btn bg-gray margin">Modifier le MDP</a>
-								<a href="{{ path_for('admin.auteur.destroy',{'id':auteur["id"]}) }}" class="btn bg-red margin">Supprimer</a>
+								<a href="{{ path_for('admin.auteur.destroy',{'id':auteur["id"]}) }}" class="btn bg-red margin alert_link">Supprimer</a>
 							</center>
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 						<span class="info-box-icon bg-blue"><i class="fa fa-newspaper-o"></i></span>
 						<div class="info-box-content">
 						<span class="info-box-text">Articles publiés</span>
-						<span class="info-box-number">13,648</span>
+						<span class="info-box-number">{{ auteur["articles"]|length }}</span>
 						</div>
 					</div>
 				</div>
@@ -52,7 +52,7 @@
 						<span class="info-box-icon bg-blue"><i class="fa fa-commenting-o"></i></span>
 						<div class="info-box-content">
 						<span class="info-box-text">Commentaires publiés</span>
-						<span class="info-box-number">13,648</span>
+						<span class="info-box-number">{{ auteur["commentaires"]|length }}</span>
 						</div>
 					</div>
 				</div>
@@ -66,6 +66,58 @@
 							<h3 class="box-title">Articles publiés</h3>
 						</div>
 						<div class="box-body">
+						   <table id="table_d_1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_d_1_info">
+						        <thead>
+						            <tr role="row">
+						                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+						                    ID
+						                </th>
+						                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+						                    Actif
+						                </th>
+						                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+						                    Titre
+						                </th>
+						                <th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+						                    Date Création
+						                </th>
+						                <th tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+						                    Action
+						                </th>
+						            </tr>
+						        </thead>
+						        <tbody>
+						            {% for article in auteur["articles"] %}
+						            <tr role="row" class="odd">
+						                <td>{{ article["id"] }}</td>
+						                <td>
+						                    {% if article["actif"] == "1" %}
+						                        <span style="color:green;">Oui</span>
+						                    {% else %}
+						                        <span style="color:red;">Non</span>
+						                    {% endif %}
+						                </td>
+						                <td>{{ article["titre"] }}</td>
+						                <td>{{ article["created_at"] }}</td>
+						                <td class="action_rows_table">
+						                    <a href="{{ path_for('admin.article.show',{'id':article["id"]}) }}">Voir</a> |
+						                    <a href="{{ path_for('admin.article.edit',{'id':article["id"]}) }}">Editer</a> |
+						                    <a href="{{ path_for('admin.image.indexarticle',{'article':article["id"]}) }}">Images</a> |
+						                    <a href="{{ path_for('admin.article.destroy',{'id':article["id"]}) }}" class="alert_link">Supprimer</a>
+						                </td>
+						            </tr>
+						            {% endfor %}
+						        </tbody>
+						        <tfoot>
+						            <tr>
+						                <th rowspan="1" colspan="1">ID</th>
+						                <th rowspan="1" colspan="1">Actif</th>
+						                <th rowspan="1" colspan="1">Iitre</th>
+						                <th rowspan="1" colspan="1">Date Création</th>
+						                <th rowspan="1" colspan="1">Action</th>
+						            </tr>
+						        </tfoot>
+						    </table>
 						</div>
 					</div>
 				</div>
@@ -75,6 +127,66 @@
 							<h3 class="box-title">Commentaires publiés</h3>
 						</div>
 						<div class="box-body">
+							<table id="table_d_1" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="table_d_1_info">
+								<thead>
+									<tr role="row">
+										<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+											ID
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+											Actif
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+											Article
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+											Contenu
+										</th>
+										<th class="sorting" tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+											Date Création
+										</th>
+										<th tabindex="0" aria-controls="table_d_1" rowspan="1" colspan="1">
+											Action
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for commentaire in auteur["commentaires"] %}
+									<tr role="row" class="odd">
+										<td>{{ commentaire["id"] }}</td>
+						                <td>
+						                    {% if commentaire["actif"] == "1" %}
+						                        <span style="color:green;">Oui</span>
+						                    {% else %}
+						                        <span style="color:red;">Non</span>
+						                    {% endif %}
+						                </td>
+										<td>
+											<a href="{{ path_for('admin.article.show',{'id':commentaire["article"]["id"]}) }}">
+												{{ commentaire["article"]["titre"] }}
+											</a>
+										</td>
+										<td>{{ commentaire["contenu"]|striptags }}</td>
+										<td>2016-01-01</td>
+										<td class="action_rows_table">
+											<a href="{{ path_for('admin.commentaire.show',{'id':commentaire["id"]}) }}">Voir</a> |
+											<a href="{{ path_for('admin.commentaire.edit',{'id':commentaire["id"]}) }}?redirect=all">Editer</a> |
+											<a href="{{ path_for('admin.commentaire.destroy',{'id':commentaire["id"]}) }}?redirect=all" class="alert_link">Supprimer</a>
+										</td>
+									</tr>
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<th rowspan="1" colspan="1">ID</th>
+										<th rowspan="1" colspan="1">Actif</th>
+										<th rowspan="1" colspan="1">Article</th>
+										<th rowspan="1" colspan="1">Contenu</th>
+										<th rowspan="1" colspan="1">Date Création</th>
+										<th rowspan="1" colspan="1">Action</th>
+									</tr>
+								</tfoot>
+							</table>
 						</div>
 					</div>
 				</div>

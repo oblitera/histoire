@@ -11,35 +11,19 @@
 {% block admin_form_formulaire %}
     <form method="POST">
         <div class="item_form">
-            <label>Article</label>
-            <select name="email" value="{{values['article']}}" class="form-control select2">
-                <option>Article 1 (auteur 1)</option>
-                <option>Article 2 (auteur 1)</option>
-                <option>Article 3 (auteur 2)</option>
-                <option>Article 4 (auteur 2)</option>
-                <option>Article 5 (auteur 3)</option>
-            </select>
-            {% for erreur in errors['article'] %}
+            <label>Contenu</label>
+            <textarea name="contenu"  class="form-control textarea">{{ values["contenu"] }}</textarea>
+            {% for erreur in errors['contenu'] %}
                 <span class="error_champs">{{ erreur }}</span>
             {% endfor %}
         </div>
         <div class="item_form">
-            <label>Auteur</label>
-            <select name="email" value="{{values['auteur']}}" class="form-control select2">
-                <option>Auteur 1</option>
-                <option>Auteur 2</option>
-                <option>Auteur 3</option>
-                <option>Auteur 4</option>
-                <option>Auteur 5</option>
+            <label>Actif</label>
+            <select name="actif" class="form-control select2">
+                <option {% if values['actif'] == "0" %} selected {% endif %} value="0">Non</option>
+                <option {% if values['actif'] == "1" %} selected {% endif %} value="1">Oui</option>                
             </select>
-            {% for erreur in errors['article'] %}
-                <span class="error_champs">{{ auteur }}</span>
-            {% endfor %}
-        </div>
-        <div class="item_form">
-            <label>Contenu</label>
-            <textarea name="contenu"  class="form-control textarea">testlll</textarea>
-            {% for erreur in errors['contenu'] %}
+            {% for erreur in errors['actif'] %}
                 <span class="error_champs">{{ erreur }}</span>
             {% endfor %}
         </div>

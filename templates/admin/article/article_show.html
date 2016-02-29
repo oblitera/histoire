@@ -23,7 +23,7 @@
 					<br>
 					<a href="{{ path_for('admin.auteur.show',{'id':article['auteur']['id']}) }}" class="btn bg-gray margin">Voir l'auteur ({{ article['auteur']['pseudo'] }})</a>
 					<a href="{{ path_for('admin.article.edit',{'id':article['id']}) }}" class="btn bg-gray margin">Editer</a>
-					<a href="{{ path_for('admin.article.destroy',{'id':article['id']}) }}" class="btn bg-red margin">Supprimer</a>
+					<a href="{{ path_for('admin.article.destroy',{'id':article['id']}) }}" class="btn bg-red margin alert_link" >Supprimer</a>
 				</div>
 			</div>
 		</div>
@@ -46,6 +46,7 @@
 					Images associées
 				</div>
 				<div class="box-body">
+					<a href="{{ path_for('admin.image.indexarticle',{'article':article["id"]}) }}" class="btn bg-gray margin">Gérer les images</a>
 					<div class="row">
 						{% for key, image in article["images"] %}
 							{% if key != 0 %}
@@ -96,14 +97,21 @@
 							{% for commentaire in article['commentaires'] %}
 							<tr role="row" class="odd">
 								<td>{{ commentaire['id'] }}</td>
+				                <td>
+				                    {% if commentaire["actif"] == "1" %}
+				                        <span style="color:green;">Oui</span>
+				                    {% else %}
+				                        <span style="color:red;">Non</span>
+				                    {% endif %}
+				                </td>
 								<td>{{ commentaire['auteur_id'] }}</td>
 								<td>
-									{{ commentaire['contenu'] }}
+									{{ commentaire['contenu']|striptags }}
 								</td>
 								<td>2016-01-01</td>
 								<td class="action_rows_table">
-									<a href="{{ path_for('admin.commentaire.edit',{'id':1}) }}">Editer</a> |
-									<a href="{{ path_for('admin.commentaire.destroy',{'id':1}) }}">Supprimer</a>
+									<a href="{{ path_for('admin.commentaire.edit',{'id':commentaire['id']}) }}">Editer</a> |
+									<a href="{{ path_for('admin.commentaire.destroy',{'id':commentaire['id']}) }}"  class="alert_link">Supprimer</a>
 								</td>
 							</tr>
 							{% endfor %}
@@ -111,6 +119,7 @@
 						<tfoot>
 							<tr>
 								<th rowspan="1" colspan="1">ID</th>
+								<th rowspan="1" colspan="1">Actif</th>
 								<th rowspan="1" colspan="1">Auteur</th>
 								<th rowspan="1" colspan="1">Contennu</th>
 								<th rowspan="1" colspan="1">Date Création</th>

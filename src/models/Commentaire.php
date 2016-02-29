@@ -11,6 +11,11 @@ class Commentaire extends Model {
 		return $this->belongsTo('Article', 'article_id');
 	}
 
+	public function auteur()
+	{
+		return $this->belongsTo('Auteur', 'auteur_id');
+	}
+
     static function add($article, $data)
     {
     	$commentaire = new Commentaire();
