@@ -1,0 +1,96 @@
+{% extends "admin/starter.html" %}
+
+{% block starter_h1 %}
+    Tableau de bord
+{% endblock %}
+
+{% block starter_h1_complement %}
+    
+{% endblock %}
+
+{% block starter_layout %}
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Auteurs</span>
+                    <span class="info-box-number">{{ auteurs }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-newspaper-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Articles</span>
+                    <span class="info-box-number">{{ articles }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-commenting-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Commentaires</span>
+                    <span class="info-box-number">{{ commentaires }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <canvas id="myChart" style="width: 100% !important;height: 400px !important;"></canvas>
+                </div>
+            </div>            
+        </div>
+    </div>
+{% endblock %}
+
+{% block starter_footer_js %}
+    <script src="{{ themeAdmin }}/plugins/chartjs/Chart.min.js"></script>
+    <script type="text/javascript">
+        var data = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [
+                {
+                    label: "My First dataset",
+                    fillColor: "rgba(220,220,220,0.2)",
+                    strokeColor: "red",
+                    pointColor: "rgba(220,220,220,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: [65, 59, 80, 81, 56, 55, 40]
+                },
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "#f39c12",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: [28, 48, 40, 19, 86, 27, 90]
+                },
+                {
+                    label: "My 3éme dataset",
+                    fillColor: "rgba(151,187,205,0.2)",
+                    strokeColor: "#00c0ef",
+                    pointColor: "rgba(151,187,205,1)",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "#00c0e",
+                    data: [0, 25, 35, 20, 48, 2, 90]
+                }
+            ]
+        };
+
+        $(function(){
+            var ctx = document.getElementById("myChart").getContext("2d");
+            var myLineChart = new Chart(ctx).Line(data);
+        });
+    </script>
+{% endblock %}
