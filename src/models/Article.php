@@ -44,4 +44,17 @@ class Article extends Model {
 		$cible->save();
     }
 
+    static function stat($nbJours)
+    {
+    	$tablDay = Tools::get_array_jours(7);
+    	
+    	foreach ($tablDay as $date => &$value) 
+    	{
+    		$value = Article::whereRaw('created_at > "'.$date.' 00:00:00" and created_at < "'.$date.' 23:59:59"')->count();
+    	}
+    	unset($value);
+    	
+    	return $tablDay;
+    }
+
 }

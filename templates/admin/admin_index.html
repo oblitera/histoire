@@ -41,8 +41,12 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="box box-primary">
+                <div class="box-header">
+                    Activité sur la semaine
+                </div>
                 <div class="box-body">
                     <canvas id="myChart" style="width: 100% !important;height: 400px !important;"></canvas>
+                    <div id="lineLegend"></div>
                 </div>
             </div>            
         </div>
@@ -53,44 +57,68 @@
     <script src="{{ themeAdmin }}/plugins/chartjs/Chart.min.js"></script>
     <script type="text/javascript">
         var data = {
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: {{ label_by_jours| raw }},
             datasets: [
                 {
-                    label: "My First dataset",
-                    fillColor: "rgba(220,220,220,0.2)",
-                    strokeColor: "red",
-                    pointColor: "rgba(220,220,220,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(220,220,220,1)",
-                    data: [65, 59, 80, 81, 56, 55, 40]
-                },
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(151,187,205,0.2)",
-                    strokeColor: "#f39c12",
-                    pointColor: "rgba(151,187,205,1)",
-                    pointStrokeColor: "#fff",
-                    pointHighlightFill: "#fff",
-                    pointHighlightStroke: "rgba(151,187,205,1)",
-                    data: [28, 48, 40, 19, 86, 27, 90]
-                },
-                {
-                    label: "My 3éme dataset",
-                    fillColor: "rgba(151,187,205,0.2)",
+                    label: "Auteur crée",
+                    fillColor: "#00c0ef",
                     strokeColor: "#00c0ef",
-                    pointColor: "rgba(151,187,205,1)",
+                    pointColor: "#00c0ef",
                     pointStrokeColor: "#fff",
                     pointHighlightFill: "#fff",
                     pointHighlightStroke: "#00c0e",
-                    data: [0, 25, 35, 20, 48, 2, 90]
+                    data: {{ auteurs_by_jours }}
+                },
+                {
+                    label: "Article crée",
+                    fillColor: "red",
+                    strokeColor: "red",
+                    pointColor: "red",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(220,220,220,1)",
+                    data: {{ articles_by_jours }}
+                },
+                {
+                    label: "Commentaire crée",
+                    fillColor: "#f39c12",
+                    strokeColor: "#f39c12",
+                    pointColor: "#f39c12",
+                    pointStrokeColor: "#fff",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(151,187,205,1)",
+                    data: {{ commentaires_by_jours }}
                 }
             ]
         };
 
         $(function(){
             var ctx = document.getElementById("myChart").getContext("2d");
-            var myLineChart = new Chart(ctx).Line(data);
+            var myLineChart = new Chart(ctx).Bar(data, {});
+            document.getElementById("lineLegend").innerHTML = myLineChart.generateLegend();
         });
     </script>
+    <style>
+        #lineLegend ul 
+        {
+            list-style-type:none;
+        }
+
+        #lineLegend li
+        {
+            display: block;
+            position:relative;
+            padding:5px 25px;
+        }
+
+        #lineLegend span
+        {
+            display:block;!important;
+            position:absolute;
+            top:5px;
+            left:0px;
+            width: 20px!important;
+            height: 20px!important;
+        }
+    </style>
 {% endblock %}

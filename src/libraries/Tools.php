@@ -38,4 +38,16 @@ class Tools
 		return "";
 	}
 
+    static function get_array_jours($nbJours)
+    {
+    	$current = new DateTime();
+    	$tablDay = array();
+    	for ($i=0; $i < $nbJours; $i++) 
+    	{ 
+    		$tablDay[$current->format('Y-m-d')] = 0;
+    		$current->modify('-1 day');
+    	}
+
+    	return $tablDay;
+    }
 }

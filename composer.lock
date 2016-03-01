@@ -5,7 +5,6 @@
         "This file is @generated automatically"
     ],
     "hash": "46fdf93c394ab4d18d1a5c30985ec307",
-    "content-hash": "af2043d6a17867f1295fbd32c98684f9",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -742,16 +741,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/slimphp/Slim.git",
-                "reference": "835425f5945a25509eeab885e80617948e68371d"
+                "reference": "53a4dd576dd3add4efd113ca77c3c21fa559b33e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/835425f5945a25509eeab885e80617948e68371d",
-                "reference": "835425f5945a25509eeab885e80617948e68371d",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/53a4dd576dd3add4efd113ca77c3c21fa559b33e",
+                "reference": "53a4dd576dd3add4efd113ca77c3c21fa559b33e",
                 "shasum": ""
             },
             "require": {
@@ -805,7 +804,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-02-25 08:15:17"
+            "time": "2016-02-29 21:39:18"
         },
         {
             "name": "slim/twig-view",
