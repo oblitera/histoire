@@ -1,5 +1,6 @@
 var map = false;
 var marque = false;
+var bounds = new google.maps.LatLngBounds();
 
 function maps_pointer_position(init_lat, init_long)
 {
@@ -44,14 +45,18 @@ function create_map_and_markers(init_lat, init_long, zoom, markers)
         div: '#carte',
         lat: (init_lat) ? init_lat : 48.855680,
         lng: (init_long) ? init_long : 2.246704,
-        zoom: 10
+        zoom: zoom
     });
 
     for(i in markers)
     {
-        map.addMarker({
+        var tempoMarqueur = map.addMarker({
           lat: markers[i].coordonnee_lat,
           lng: markers[i].coordonnee_long
-        });         
+        }); 
+
+        bounds.extend(tempoMarqueur.position);        
     }
+
+    map.fitBounds(bounds);
 }

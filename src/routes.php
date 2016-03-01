@@ -7,6 +7,7 @@ include("models/Article.php");
 include("models/Auteur.php");
 include("models/Commentaire.php");
 include("models/Image.php");
+include("models/Recherche.php");
 
 // validation
 include("validations/Validation.php");
@@ -241,8 +242,9 @@ $app->get('/admin/commentaire/destroy/{id:[0-9]+}', function ($request, $respons
 //----------------------
 
 //view
-$app->get('/index', function ($request, $response, $args) {
-    return $this->view->render($this->response, 'front/listerecherche.html');
+$app->get('/article/index', function ($request, $response, $args) {
+    $c = new ControllerArticle($this, $request, $response, $args);
+    return $c->index();
 })->setName('front.article.index');
 
 //view

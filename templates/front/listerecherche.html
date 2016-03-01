@@ -27,3 +27,21 @@
         </ul>
     </div>
 {% endblock %}
+
+{% block starter_footer_js %}
+    <script type="text/javascript">
+        var coordonnee_long = {{ data["data"][0]["coordonnee_long"] }};
+        var coordonnee_lat  = {{ data["data"][0]["coordonnee_lat"] }};
+
+        var markers = [
+            {% for article in data["data"] %}
+                {
+                    coordonnee_long:{{ article["coordonnee_long"] }},
+                    coordonnee_lat:{{ article["coordonnee_lat"] }}                   
+                },
+            {% endfor %}
+        ];
+
+        create_map_and_markers(coordonnee_lat, coordonnee_long, 3, markers)
+    </script>   
+{% endblock %}
