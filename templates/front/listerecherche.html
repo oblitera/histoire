@@ -2,18 +2,22 @@
 
 {% block layout_corps %}
     <div class="conteneur_item_recherche">
-        {% for i in 0..10 %}
+        {% for article in data["data"] %}
             <div class="row item_recherche">
                 <div class="col-lg-3">
                     <a>
-                        <img src="{{ imgUrl }}122903-122903.jpg" style="width:100%" class="item_recherche_img">
+                        {% if article["images"] is empty %}
+                            <img src="{{ imgUrl }}122903-122903.jpg" style="width:100%" class="item_recherche_img">
+                        {% else %}
+                            <img src="{{ imgUrl }}articles/{{ article["images"][0]["src"] }}" style="width:100%" class="item_recherche_img">
+                        {% endif %}
                     </a>
                 </div>
                 <div class="col-lg-9">
                     <a class="item_recherche_auteur">Auteur</a> | <a class="item_recherche_viewcarte">Voir sur la carte</a>
-                    <h2>Titre de l'article</h2>
-                    <a class="item_recherche_preview">
-                        Etenim si attendere diligenter, existimare vere de omni hac causa volueritis, sic constituetis, iudices, nec descensurum quemquam ad hanc accusationem fuisse, cui, utrum vellet, liceret, nec, cum descendisset, quicquam habiturum spei fuisse, nisi alicuius intolerabili libidine(...)
+                    <h2>{{ article["titre"] }}</h2>
+                    <a href="{{ path_for('front.article.show',{'id':article["id"]}) }}" class="item_recherche_preview">
+                        {{ article["contenu"]|striptags|slice(0,150) }}(...)
                     </a>
                 </div>
             </div>                   
