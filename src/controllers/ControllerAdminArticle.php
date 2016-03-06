@@ -17,7 +17,7 @@ class ControllerAdminArticle extends ControllerAdmin
 	public function index()
 	{
 		$data = array(
-			"articles" => Article::all()->toArray()
+			"articles" => Article::with("auteur")->get()->toArray()
 		);
 
 		return $this->app->view->render($this->response, 'admin/article/article_index.html', $data);

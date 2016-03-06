@@ -9,12 +9,12 @@ class ControllerArticle extends Controller
 
 	public function index()
 	{
-		$data = array(
-			"data" => Recherche::recherche_by_text("%%")->toArray()
-		);
+		$offset = (empty($this->args["offset"])) ? 0 : $this->args["offset"];
 
-		/*echo("<pre>");
-		var_dump($data);die();*/
+
+
+		$data = Recherche::recherche_by_text("%%", $offset);
+
 
 		return $this->app
 					->view

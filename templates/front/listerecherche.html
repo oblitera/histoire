@@ -2,7 +2,7 @@
 
 {% block layout_corps %}
     <div class="conteneur_item_recherche">
-        {% for article in data["data"] %}
+        {% for article in data %}
             <div class="row item_recherche">
                 <div class="col-lg-3">
                     <a>
@@ -25,20 +25,28 @@
     </div>
     <div class="conteneur_item_pagination">
         <ul>
-            {% for i in 1..30 %}
-                <li>{{ i }}</li>
-            {% endfor %}
+            {% if nbPage is not empty %}
+                {% if nbPage > 1 %}
+                    {% for i in 0..nbPage-1 %}
+                        <li {% if currentPage == i %} class="current_page" {% endif %}>
+                            <a href="{{ path_for('front.article.index',{'offset':i*limit}) }}">
+                                {{ i+1 }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
         </ul>
     </div>
 {% endblock %}
 
 {% block starter_footer_js %}
     <script type="text/javascript">
-        var coordonnee_long = {{ data["data"][0]["coordonnee_long"] }};
-        var coordonnee_lat  = {{ data["data"][0]["coordonnee_lat"] }};
+        var coordonnee_long = {{ data[0]["coordonnee_long"] }};
+        var coordonnee_lat  = {{ data[0]["coordonnee_lat"] }};
 
         var markers = [
-            {% for article in data["data"] %}
+            {% for article in data %}
                 {
                     coordonnee_long:{{ article["coordonnee_long"] }},
                     coordonnee_lat:{{ article["coordonnee_lat"] }}                   

@@ -18,40 +18,16 @@
 
 @couleur_paggination_fond : @couleur_1;
 @couleur_paggination_font : @couleur_4;
-@couleur_paggination_hover_border : black;
+@couleur_paggination_hover_border : @couleur_5;
 @couleur_paggination_hover_font : @couleur_4;
+@couleur_paggination_actif_fond : @couleur_5;
+@couleur_paggination_actif_font : @couleur_1;
 
 @couleur_itemrecherche_fond : @couleur_4;
 @couleur_itemrecherche_fond_hover : @gris;
 
 @couleur_itemrecherche_h2 : black;
 
-/*@couleur_1 : #fcfff5;
-@couleur_2 : #d1dbbd;
-@couleur_3 : #7caa34;
-@couleur_4 : #3e606f;
-@couleur_5 : #193441;
-
-@couleur_fond_body : @couleur_1;
-@couleur_lien : @couleur_5;
-
-@couleur_barre_fond : @couleur_4;
-@couleur_barre_font : @couleur_1;
-
-@couleur_bt_search_fond : @couleur_3;
-@couleur_bt_search_font : @couleur_1;
-@couleur_bt_search_hover_fond : @couleur_3;
-@couleur_bt_search_hover_font : @couleur_1;
-
-@couleur_paggination_fond : @couleur_4;
-@couleur_paggination_font : @couleur_1;
-@couleur_paggination_hover_fond : @couleur_4;
-@couleur_paggination_hover_font : @couleur_1;
-
-@couleur_itemrecherche_fond : @couleur_3;
-@couleur_itemrecherche_fond_hover : @couleur_2;
-
-@couleur_itemrecherche_h2 : @couleur_5;*/
 
 .button
 {
@@ -181,7 +157,6 @@ body
 					background-color:@couleur_paggination_fond;
 					color:@couleur_paggination_font;
 					text-align:center;
-					padding-top:5px;
 					margin-right:6px;
 					margin-bottom:6px;
 					cursor:pointer;
@@ -190,6 +165,22 @@ body
 					&:hover
 					{
 						border:2px solid @couleur_paggination_hover_border!important;						
+					}
+
+					&.current_page
+					{
+						background-color:@couleur_paggination_actif_fond;
+						border:2px solid @couleur_paggination_actif_fond!important;
+					}
+
+					a
+					{
+						color:@couleur_paggination_font;
+						display:block;
+						height:100%;
+						width:100%;
+						padding-top:6px;
+						text-decoration:none;
 					}
 				}				
 			}

@@ -41,6 +41,8 @@ function maps_pointer_position(init_lat, init_long)
 
 function create_map_and_markers(init_lat, init_long, zoom, markers)
 {
+    var bound_actif = (markers.length > 1) ? true : false;
+
     map = new GMaps({
         div: '#carte',
         lat: (init_lat) ? init_lat : 48.855680,
@@ -55,8 +57,14 @@ function create_map_and_markers(init_lat, init_long, zoom, markers)
           lng: markers[i].coordonnee_long
         }); 
 
-        bounds.extend(tempoMarqueur.position);        
+        if(bound_actif)
+        {
+            bounds.extend(tempoMarqueur.position); 
+        }               
     }
 
-    map.fitBounds(bounds);
+    if(bound_actif)
+    {
+        map.fitBounds(bounds);
+    }    
 }
