@@ -249,7 +249,8 @@ $app->get('/article/index[/{offset:[0-9]+}]', function ($request, $response, $ar
 
 //view
 $app->get('/article/{id:[0-9]+}', function ($request, $response, $args) {
-    return $this->view->render($this->response, 'front/article_view.html');
+    $c = new ControllerArticle($this, $request, $response, $args);
+    return $c->show();
 })->setName('front.article.show');
 
 //view

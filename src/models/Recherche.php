@@ -23,4 +23,16 @@ class Recherche {
 					->where('titre', 'like', $text)
 					->orWhere('contenu', 'like', $text);
 	}
+
+	static function recherche_by_proximity($long, $lat, $rayon = 30)
+	{
+		$condition_gps ="(6366*ACOS(COS(RADIANS(".$lat."))*COS(RADIANS(coordonnee_lat))*COS(RADIANS(coordonnee_long)-RADIANS(".$long."))+SIN(RADIANS(".$lat."))*SIN(RADIANS(coordonnee_lat))))<".$rayon;
+
+		return Article::with('images','auteur')
+					->whereRaw($condition_gps)
+					->take(10)
+					->offset(0)
+					->get()
+					->toArray();
+	}
 }
