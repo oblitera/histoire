@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="col-lg-9">
-                    <a class="item_recherche_auteur">Auteur</a> | <a class="item_recherche_viewcarte">Voir sur la carte</a>
+                    <a class="item_recherche_auteur">Auteur</a> | <a class="item_recherche_viewcarte"  idcible="{{ article["id"] }}">Voir sur la carte</a>
                     <h2>{{ article["titre"] }}</h2>
                     <a href="{{ path_for('front.article.show',{'id':article["id"]}) }}" class="item_recherche_preview">
                         {{ article["contenu"]|striptags|slice(0,150) }}(...)
@@ -49,11 +49,27 @@
             {% for article in data %}
                 {
                     coordonnee_long:{{ article["coordonnee_long"] }},
-                    coordonnee_lat:{{ article["coordonnee_lat"] }}                   
+                    coordonnee_lat:{{ article["coordonnee_lat"] }},
+                    titre:'{{ article["titre"]|striptags|escape }}',
+                    id:{{ article["id"] }},
+                    contenu:'{{ article["contenu"] |striptags|escape|slice(0,100) }}',
+                    lien:'{{ path_for('front.article.show',{'id':article["id"]}) }}'                  
                 },
             {% endfor %}
         ];
 
-        create_map_and_markers(coordonnee_lat, coordonnee_long, 3, markers)
+        create_map_and_markers(coordonnee_lat, coordonnee_long, 3, markers);
+
+        $(function(){
+            $(".item_recherche_viewcarte").click(function(){
+                var idcible = $(this).attr("idcible");
+                var cible = get_marqer_by_id(idcible);
+                
+                if(cible != false)
+                {
+                    centrer_sur_marquer(cible);
+                }
+            });            
+        })
     </script>   
 {% endblock %}

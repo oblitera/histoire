@@ -29,7 +29,7 @@
                     </a>
                 </div>
                 <div class="col-lg-9">
-                    <a class="item_recherche_auteur">{{ resultat["auteur"]["pseudo"] }}</a> | <a class="item_recherche_viewcarte">Voir sur la carte</a>
+                    <a class="item_recherche_auteur">{{ resultat["auteur"]["pseudo"] }}</a> | <a class="item_recherche_viewcarte" idcible="{{ resultat["id"] }}">Voir sur la carte</a>
                     <h2>{{ resultat["titre"] }}</h2>
                     <a href="{{ path_for('front.article.show',{'id':resultat["id"]}) }}" class="item_recherche_preview">
                         {{ resultat["contenu"]|striptags|slice(0,200) }}(...)
@@ -49,10 +49,14 @@
         var markers = [
             {
                 coordonnee_long:{{ coordonnee_long }},
-                coordonnee_lat:{{ coordonnee_lat }}                   
+                coordonnee_lat:{{ coordonnee_lat }},
+                id:{{ id }},
+                titre:'{{ titre|striptags|escape }}',
+                contenu:'{{ contenu |striptags|escape|slice(0,100) }}', 
+                lien:'{{ path_for('front.article.show',{'id':article["id"]}) }}'                  
             }
         ];
 
-        create_map_and_markers(coordonnee_lat, coordonnee_long, 15, markers)
+        create_map_and_markers(coordonnee_lat, coordonnee_long, 15, markers);
     </script>   
 {% endblock %}
